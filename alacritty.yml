@@ -1,0 +1,29 @@
+font:
+  normal:
+    family: VictorMono Nerd Font
+    style: ExtraLight
+
+  bold:
+    family: VictorMono Nerd Font
+    style: Medium
+
+  italic:
+    family: Victor Mono
+    style: ExtraLight Italic
+
+  bold_italic:
+    family: Victor Mono
+    style: Bold Italic
+
+  size: 14
+
+  use_thin_stroke: false
+
+window:
+  padding:
+    x: 8
+    y: 1
+  dynamic_padding: true
+
+offset:
+  y: 

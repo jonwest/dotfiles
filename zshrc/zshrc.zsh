@@ -48,7 +48,4 @@ include $DOTFILES/aliases.zsh        #  Convenience aliases
 include $DOTFILES/development.zsh    #  Development modifiers
 include $DOTFILES/thinkific.zsh      #  Thinkific specific helpers
 include $DOTFILES/.p10k.zsh          #  Powerlevel10k configuration
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+include $DOTFILES/tmux.zsh
