@@ -9,18 +9,22 @@
 
 hs.console.clearConsole()
 
--- Launch or Focus Alacritty ("Quake" mode)
-hs.hotkey.bind({"cmd"}, "`", function()
-  local app = hs.application.get("Alacritty")
+hs.loadSpoon("SpoonInstall")
 
-  if app then
-    if app:isFrontmost() then
-      app:hide()
+local logger = hs.logger.new('logger', 'debug')
+local hotkey = { "alt", "shift" }
+local hotKeyMod = { "alt", "cmd", "shift" }
+
+function focusOrHide(appName)
+    if (hs.application.frontmostApplication():name():upper() == appName:upper()) then
+        hs.application.frontmostApplication():hide()
     else
-      app:activate()
+        hs.application.launchOrFocus(appName)
     end
-  else
-    hs.application.launchOrFocus("Alacritty")
-    app = hs.application.get("Alacritty")
-  end
-end)
+end
+
+-- Alacritty Hide/Show
+hs.hotkey.bind({ "cmd" }, '`', function() focusOrHide('Alacritty') end)
+
+-- Open Obsidian to Today's Note for Quick Note taking
+hs.hotkey.bind({ "cmd", "shift" }, 'O', function() focusOrHide('Obsidian') end)
