@@ -4,10 +4,9 @@
 #   _ / /\__ \ | | | | | (__ 
 #  (_)___|___/_| |_|_|  \___|
 # -----------------------------
+zmodload zsh/zprof
 export ZSH="$HOME/.oh-my-zsh"
 export DOTFILES="$HOME/Customization/dotfiles/zshrc"
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
 
 ###
 # HELPERS
@@ -20,15 +19,25 @@ include() {
 ###
 # PLUGINS
 ###
-plugins=(
-    git                       # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git/
-    git-extras                # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins#git-extras
-    kubectl                   # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/kubectl/README.md
-    iterm2
-    vi-mode                   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-)
+source $HOME/.zplug/init.zsh;
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/git-extras", from:oh-my-zsh
+zplug "plugins/kubectl", from:oh-my-zsh
+zplug "plugins/vi-mode", from:oh-my-zsh
+zplug "plugins/zsh-autosuggestions", from:oh-my-zsh
+zplug "plugins/zsh-syntax-highlighting", from:oh-my-zsh
+zplug "romkatv/powerlevel10k", as:theme, depth:1
+zplug load
+
+# plugins=(
+#     git                       # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git/
+#     git-extras                # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins#git-extras
+#     kubectl                   # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/kubectl/README.md
+#     iterm2
+#     vi-mode                   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode
+#     zsh-autosuggestions
+#     zsh-syntax-highlighting
+# )
 
 
 ###
