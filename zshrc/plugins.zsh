@@ -1,6 +1,6 @@
-###
-# PLUGINS
-###
+####
+## PLUGINS
+####
 source "$HOME/.zinit/bin/zinit.zsh"
 
 zinit light "lukechilds/zsh-nvm"                          # Lazy Load nvm
