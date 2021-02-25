@@ -4,7 +4,7 @@
 #   _ / /\__ \ | | | | | (__ 
 #  (_)___|___/_| |_|_|  \___|
 # -----------------------------
-
+zmodload zsh/zprof
 export DOTFILES="$HOME/Customization/dotfiles/zshrc"
 export KITTY_CONFIG_DIRECTORY="$HOME/Customization/dotfiles/kitty"
 
@@ -15,6 +15,7 @@ include() {
     [[ -f "$1" ]] && source "$1" || echo "ERROR loading ${1}"
 }
 
+bindkey -v  # Use vi-mode
 
 autoload -Uz compinit
 [[ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]] && compinit || compinit -C
@@ -34,7 +35,3 @@ include $DOTFILES/p10k.zsh            #  Powerlevel10k configuration
 include $DOTFILES/tmux.zsh            #  Create or attach to a tmux session on start
 include $DOTFILES/aliases.zsh         #  Convenience aliases
 include $HOME/.zshsecrets             #  Sensitive material that shouldn't be in version control
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
