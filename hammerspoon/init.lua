@@ -9,9 +9,6 @@
 
 hs.console.clearConsole()
 
-hs.loadSpoon("SpoonInstall")
-
-local logger = hs.logger.new('logger', 'debug')
 local hotkey = { "alt", "shift" }
 local hotKeyMod = { "alt", "cmd", "shift" }
 
@@ -23,8 +20,8 @@ function focusOrHide(appName)
     end
 end
 
--- Alacritty Hide/Show
-hs.hotkey.bind({ "cmd" }, '`', function() focusOrHide('Alacritty') end)
+-- Kitty Hide/Show
+hs.hotkey.bind({ "cmd" }, '`', function() focusOrHide('kitty') end)
 
 -- Open Obsidian to Today's Note for Quick Note taking
 hs.hotkey.bind({ "cmd", "shift" }, 'O', function() focusOrHide('Obsidian') end)
