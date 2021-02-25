@@ -3,15 +3,17 @@
 #   / _` |/ _ \ \ / / _ \ |/ _ \| '_ \| '_ ` _ \ / _ \ '_ \| __|
 #  | (_| |  __/\ V /  __/ | (_) | |_) | | | | | |  __/ | | | |_ 
 #   \__,_|\___| \_/ \___|_|\___/| .__/|_| |_| |_|\___|_| |_|\__|
-#                               |_|                             
+#       E N V I R O N M E N T   |_|     V A R I A B L E S
 
 ####
-## Kubernetes
+## Node
 ####
-[[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)    # ZSH completion for k8s
-
+export NVM_DIR="$HOME/.nvm"
+export NVM_LAZY_LOAD=true
+export NVM_AUTO_USE=true
+export NVM_COMPLETION=true
 
 ####
 ## Ruby
 ####
-_evalcache rbenv init -
+export PATH="$HOME/.rbenv/bin:$PATH"
