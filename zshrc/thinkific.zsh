@@ -26,12 +26,12 @@ function genvpn {
     scp -i "$HOME/.aws/thinkific-$1-us-east-1.pem" "$CONNECTION:$2.ovpn" $(pwd)/$2-$1.ovpn;
 }
 
-# # Powerlevel9k Tweaks
-# typeset -g POWERLEVEL9K_AWS_CLASSES=(
-#       '*think-pr*'  PROD    # These values are examples that are unlikely
-#       '*think-st*'  STAGING    # to match your needs. Customize them as needed.
-#       '*'           DEFAULT)
-# typeset -g POWERLEVEL9K_KUBECONTEXT_CLASSES=(
-#       '*pr*'  PROD       # These values are examples that are unlikely
-#       '*st*'  STAGING    # to match your needs. Customize them as needed.
-#       '*'     DEFAULT)
+# Powerlevel9k Tweaks
+typeset -g POWERLEVEL9K_AWS_CLASSES=(
+      '*think-pr*'  PROD    # These values are examples that are unlikely
+      '*think-st*'  STAGING    # to match your needs. Customize them as needed.
+      '*'           DEFAULT)
+typeset -g POWERLEVEL9K_KUBECONTEXT_CLASSES=(
+      '*pr*'  PROD       # These values are examples that are unlikely
+      '*st*'  STAGING    # to match your needs. Customize them as needed.
+      '*'     DEFAULT)
