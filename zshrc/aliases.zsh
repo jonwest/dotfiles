@@ -5,9 +5,18 @@
 #   \__,_|_|_|\__,_|___/\___||___/
 #                                 
 
-alias vim="nvim"
+alias vim="nvim"  # Use neovim instead of vim
+
 alias lt="exa -l -a -h --git --icons --color never -T -L 2"     # Show folder tree
 alias ll="exa -l -a -h --git --icons --color never"             # `ls` with icons
+
+####
+## GIT
+####
+alias gc="git commit -m"
+alias gco="git checkout"
+alias gcob="git checkout -b"
+
 
 # Download v.reddit videos
 function vred {
