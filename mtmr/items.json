@@ -10,8 +10,16 @@
     "from": 0, // Lower bound of search range for next event in hours.        Default 0 (current time)(can be negative to view events in the past)
     "to": 12, // Upper bounds of search range for next event in hours.        Default 12 (12 hours in the future)
     "maxToShow": 3, // Limits the maximum number of events displayed.          Default 3 (the first 3 upcoming events)
-    "autoResize": false, // If true, widget will expand to display all events. Default false (scrollable view within "width")
-    "width": 150
+    // "autoResize": false, // If true, widget will expand to display all events. Default false (scrollable view within "width")
+  },
+  {
+    "type": "timeButton",
+    "formatTemplate": "YYYY-MM-dd — hh:mm a",
+    "align": "left",
+    "bordered": false,
+    "longAction": "shellScript",
+    "longExecutablePath": "/usr/bin/pmset",
+    "longShellArguments": ["sleepnow"]
   },
   {
     "type": "weather",
@@ -24,14 +32,5 @@
     "type": "battery",
     "align": "right",
     "bordered": false
-  },
-  {
-    "type": "timeButton",
-    "formatTemplate": "YYYY-MM-dd — hh:mm a",
-    "align": "right",
-    "bordered": false,
-    "longAction": "shellScript",
-    "longExecutablePath": "/usr/bin/pmset",
-    "longShellArguments": ["sleepnow"]
   }
 ]
