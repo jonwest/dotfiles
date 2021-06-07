@@ -28,3 +28,17 @@ function vred {
 
     $HOME/bin/vred --maxquality -u $1 -p $(pwd)
 }
+
+# Download YouTube as audio
+function ytdl {
+    if [[ -z "$1" ]]; then
+        echo "Usage: \n\t ytdl (url)"
+        echo "\t Will download to current working folder"
+        return 0
+    fi
+
+    youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
+}
+
+# Use VSCode instead of Sublime Text
+alias subl='code'
