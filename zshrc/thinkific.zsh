@@ -40,10 +40,10 @@ function vpn {
     OP=$1;
     VPN=$2;
 
-    if [[ "$OP" == "c" ]]; then $OP="connect"; fi
-    if [[ "$OP" == "d" ]]; then $OP="disconnect"; fi
-    if [[ "$VPN" == "production" ]]; then $VPN="prod"; fi
-    if [[ "$VPN" == "stg" ]]; then $VPN="staging"; fi
+    if [[ "$OP" == "c" ]]; then OP="connect"; fi
+    if [[ "$OP" == "d" ]]; then OP="disconnect"; fi
+    if [[ "$VPN" == "production" ]]; then VPN="prod"; fi
+    if [[ "$VPN" == "stg" ]]; then VPN="staging"; fi
 
     osascript -e "tell application \"/Applications/Tunnelblick.app\"" -e "${OP} \"thinkific-${VPN}\"" -e "end tell"
 }
