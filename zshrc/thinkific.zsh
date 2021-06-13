@@ -50,19 +50,25 @@ function vpn {
 
 # Get OVPN credentials
 function getvpn {
-    if [[ -z "$1" || -z "$2" ]]; then
-        echo "Usage: \n\t getvpn (env) (user)"
+    if [[ -z "$1" ]]; then
+        echo "Usage: \n\t getvpn (user_name)"
         exit
     fi
 
-    if [[ "$1" == "production" ]]; then CONNECTION="ec2-user@10.0.1.12"; fi
-    if [[ "$1" == "staging" ]]; then CONNECTION="ec2-user@10.0.1.254"; fi
+    # if [[ "$1" == "production" ]]; then CONNECTION="ec2-user@10.0.1.12"; fi
+    # if [[ "$1" == "staging" ]]; then CONNECTION="ec2-user@10.0.1.254"; fi
 
-    echo "Connecting and downloading OVPN file to $(pwd)/$2-$1.ovpn...";
-    vpn c $1;
+    echo "Connecting and downloading OVPN file to $(pwd)/$1-staging.ovpn...";
+    vpn c staging;
     sleep 5;
-    scp -o IdentitiesOnly=yes -i "~/.aws/thinkific-vpn-$1-us-east-1.pem" "$CONNECTION:~/$2.ovpn" "./$2-$1.ovpn"
-    vpn d $1;
+    scp -o IdentitiesOnly=yes -i "~/.aws/thinkific-vpn-staging-us-east-1.pem" "ec2-user@10.0.1.254:~/$1.ovpn" "./$1-staging.ovpn"
+    vpn d staging;
+    sleep 5;
+    echo "Connecting and downloading OVPN file to $(pwd)/$1-production.ovpn...";
+    vpn c production;
+    sleep 5;
+    scp -o IdentitiesOnly=yes -i "~/.aws/thinkific-vpn-production-us-east-1.pem" "ec2-user@10.0.1.12:~/$1.ovpn" "./$1-production.ovpn"
+    vpn d staging;
 }
 
 
