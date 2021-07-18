@@ -1,44 +1,36 @@
-#         _ _                     
-#    __ _| (_) __ _ ___  ___  ___ 
-#   / _` | | |/ _` / __|/ _ \/ __|
-#  | (_| | | | (_| \__ \  __/\__ \
-#   \__,_|_|_|\__,_|___/\___||___/
-#                                 
+#              :::.                                      ...         
+#             .::-:                                    .::-::        
+#             .:::.                                    .:::::        
+#          ..:-:::.                                     :::::.       
+#         :----------                                    ::::-:      
+#         ---------:-:::....                           :--------::   
+#         :--:---::----::-:.                         .:----::--:--:  
+#         .=-------:--:..::..            ...:.     .:------::---::-. 
+#          :------. .----::-.              :::::::----:::---:---::-: 
+#          :-----:    .....                    ....:.   .-------::--.
+#         .------:                                       :------::--:
+#         :-------:                                       :-::::::.  
+#         ----:-----                                      :------.   
+#        :---:  :---:                                    :--------   
+#       .---.    .---                                  .------:---   
+#       .--.       :-:                                :-----:::--:   
+#       :-.         --.                              :----:. ---:    
+#      :-:         .-::                             :---:.  .---     
+#     ::-:          :--                            .--:.    :--.     
+#    .--:            ::                            :--.     .:::     
+#    .::             :-:                           .:::      :-::    
+#    ::              .::::.                        .-:-:     .-:-.   
+#  .:-:                                             ::-:      :-:.   
+#                                                 .:::       -:. 
+#
+#          █████╗ ██╗     ██╗ █████╗ ███████╗███████╗███████╗    
+#         ██╔══██╗██║     ██║██╔══██╗██╔════╝██╔════╝██╔════╝    
+#         ███████║██║     ██║███████║███████╗█████╗  ███████╗    
+#         ██╔══██║██║     ██║██╔══██║╚════██║██╔══╝  ╚════██║    
+#         ██║  ██║███████╗██║██║  ██║███████║███████╗███████║    
+#         ╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝    
 
-alias vim="nvim"  # Use neovim instead of vim
-
+alias vim="nvim"                                                # Use neovim instead of vim
 alias lt="exa -l -a -h --git --icons --color never -T -L 2"     # Show folder tree
 alias ll="exa -l -a -h --git --icons --color never"             # `ls` with icons
-
-####
-## GIT
-####
-alias gc="git commit -m"
-alias gco="git checkout"
-alias gcob="git checkout -b"
-
-
-# Download v.reddit videos
-function vred {
-    if [[ -z "$1" ]]; then
-        echo "Usage: \n\t vred (url)"
-        echo "\t Will download to current working folder"
-        return 0
-    fi
-
-    $HOME/bin/vred --maxquality -u $1 -p $(pwd)
-}
-
-# Download YouTube as audio
-function ytdl {
-    if [[ -z "$1" ]]; then
-        echo "Usage: \n\t ytdl (url)"
-        echo "\t Will download to current working folder"
-        return 0
-    fi
-
-    youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
-}
-
-# Use VSCode instead of Sublime Text
-alias subl='code'
+alias colordemo="spectrum_ls"
