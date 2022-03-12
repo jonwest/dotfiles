@@ -61,7 +61,7 @@ function getvpn {
     echo "Connecting and downloading OVPN file to $(pwd)/$1-staging.ovpn...";
     vpn c staging;
     sleep 5;
-    scp -o IdentitiesOnly=yes -i "~/.aws/thinkific-vpn-staging-us-east-1.pem" "ec2-user@10.0.1.254:~/$1.ovpn" "./$1-staging.ovpn"
+    scp -o IdentitiesOnly=yes -i "~/.aws/thinkific-vpn-staging-us-east-1.pem" "ec2-user@10.0.1.16:~/$1.ovpn" "./$1-staging.ovpn"
     vpn d staging;
     sleep 5;
     echo "Connecting and downloading OVPN file to $(pwd)/$1-production.ovpn...";
