@@ -6,15 +6,21 @@
 
 - link: 
     ~/.zshrc: zshrc/zshrc.zsh
-    ~/.tmux/plugins/tpm: tmux/tpm
+    ~/.tmux/plugins/tpm: 
+      path: tmux/tpm
+      create: true
     ~/.tmux.conf: tmux/conf/tmux.conf
     ~/.config/kitty/kitty.conf: 
       path: kitty/kitty.conf
+      create: true
       if: '[ `uname` = Darwin ]'
     ~/.ansible/ansible.cfg: 
       path: ansible.cfg
+      create: true
       if: '[ `which ansible` ]'
-    ~/.config/nvim: vim/NvChad
+    ~/.config/nvim: 
+      path: vim/NvChad
+      create: true
 
 - shell:
   - command: ./init.sh
