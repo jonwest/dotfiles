@@ -1,0 +1,32 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link: 
+    ~/.zshrc: zshrc/zshrc.zsh
+    ~/.tmux/plugins/tpm: tmux/tpm
+    ~/.tmux.conf: tmux/conf/tmux.conf
+    ~/.config/kitty/kitty.conf: 
+      path: kitty/kitty.conf
+      if: '[ `uname` = Darwin ]'
+    ~/.ansible/ansible.cfg: 
+      path: ansible.cfg
+      if: '[ `which ansible` ]'
+    ~/.config/nvim: vim/NvChad
+
+- shell:
+  - command: $(which zsh) && chsh -s $(which zsh)
+    stdin: true
+    stderr: true
+    stdout: true
+    description: Set shell to zsh if available
+  - command: $HOME/.tmux/plugins/tpm/bin/install_plugins
+    stdout: true
+    description: Install tmux plugins
+  - command: $(which nvim) && nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+    stdin: true
+    stderr: true
+    stdout: true
+    description: Install NvChad if possible
