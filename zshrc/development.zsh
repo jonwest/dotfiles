@@ -10,8 +10,3 @@
 ####
 [[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)    # ZSH completion for k8s
 
-
-####
-## Ruby
-####
-_evalcache rbenv init -

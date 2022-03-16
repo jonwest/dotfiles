@@ -41,8 +41,3 @@ npx() {
   lazynvm
   npx $@
 }
-
-####
-## Ruby
-####
-export PATH="$HOME/.rbenv/bin:$PATH"

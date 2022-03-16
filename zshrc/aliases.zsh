@@ -39,6 +39,3 @@ function ytdl {
 
     youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
 }
-
-# Use VSCode instead of Sublime Text
-alias subl='code'
