@@ -17,16 +17,7 @@
     ~/.config/nvim: vim/NvChad
 
 - shell:
-  - command: $(which zsh) && chsh -s $(which zsh)
+  - command: ./init.sh
     stdin: true
     stderr: true
     stdout: true
-    description: Set shell to zsh if available
-  - command: $HOME/.tmux/plugins/tpm/bin/install_plugins
-    stdout: true
-    description: Install tmux plugins
-  - command: $(which nvim) && nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
-    stdin: true
-    stderr: true
-    stdout: true
-    description: Install NvChad if possible
