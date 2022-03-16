@@ -33,9 +33,13 @@ include $DOTFILES/plugins.zsh         #  zsh plugins via zplug
 include $DOTFILES/development.zsh     #  Development helpers
 include $DOTFILES/thinkific.zsh       #  Thinkific specific helpers
 include $DOTFILES/p10k.zsh            #  Powerlevel10k configuration
-include $DOTFILES/tmux.zsh            #  Create or attach to a tmux session on start
 include $DOTFILES/aliases.zsh         #  Convenience aliases
 include $HOME/.zshsecrets             #  Sensitive material that shouldn't be in version control
+
+if [[ $(uname) = Darwin ]]; then 
+  include $DOTFILES/tmux.zsh            #  Create or attach to a tmux session on start
+fi
+
 
 ####
 ## PREFERENCE
