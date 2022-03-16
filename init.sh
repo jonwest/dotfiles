@@ -18,5 +18,5 @@ fi
 
 # Set up NvChad if Neovim is available
 if [[ $(which nvim) ]]; then
-  nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+  nvim -c 'hi NormalFloat guibg=#1e222a' -c PackerSync -c "qa!"
 fi
