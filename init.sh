@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# If this is dev container without zsh, attempt to install it
-if [[ ${REMOTE_CONTAINERS} ]]; then
-  if [[ ! $(which zsh) && $(which apt-get) ]]; then
-    sudo apt-get update -qq &&\
-    sudo apt-get install -yqq \
-      zsh
-  fi
-fi
-
-
 # Change to zsh if available
 if [[ ! $(echo $SHELL | awk '/zsh/') ]]; then
   echo "Shell is not set to ZSH"
