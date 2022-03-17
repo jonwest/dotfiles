@@ -14,7 +14,13 @@ fi
 if [[ ! $(echo $SHELL | awk '/zsh/') ]]; then
   echo "Shell is not set to ZSH"
   if [[ $(which zsh) ]]; then
-    chsh -s $(which zsh) $(whoami) &&\
+    if [[ ${REMOTE_CONTAINERS} ]]; then
+      # Use sudo to chsh since we won't know the user password in a container
+      sudo chsh -s $(which zsh) $(whoami)
+    else 
+      chsh -s $(which zsh) $(whoami)
+    fi
+
     echo "Shell has been set to zsh";
   else
     echo "zsh is not present, cannot change shell."
