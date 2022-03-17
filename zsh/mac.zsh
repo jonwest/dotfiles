@@ -3,6 +3,9 @@
 # ╚═══════════════════════╝
 export KITTY_CONFIG_DIRECTORY="$HOME/Customization/dotfiles/kitty"
 
+# Allow keychain access to ssh keys
+ssh-add --apple-load-keychain &> /dev/null
+
 # Include Thinkific Specific helpers
 include ${DOTFILES}/thinkific.zsh
 
