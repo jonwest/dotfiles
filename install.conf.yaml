@@ -5,7 +5,7 @@
 - clean: ['~']
 
 - link: 
-    ~/.zshrc: zshrc/zshrc.zsh
+    ~/.zshrc: zsh/base.zsh
     ~/.tmux/plugins/tpm: 
       path: tmux/tpm
       create: true
