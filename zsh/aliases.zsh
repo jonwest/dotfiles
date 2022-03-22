@@ -1,6 +1,8 @@
 # ╔═══════════════════════╗
 # ║   UNIVERSAL ALIASES   ║
 # ╚═══════════════════════╝
+[[ $(which nvim) ]] && alias vim="nvim"
+
 
 # ┌─────────────────────┐
 # │     NAVIGATION      │
