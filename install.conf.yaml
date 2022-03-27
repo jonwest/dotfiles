@@ -6,10 +6,6 @@
 
 - link:
     ~/.zshrc: zsh/base.zsh
-    ~/.tmux/plugins/tpm: 
-      path: tmux/tpm
-      create: true
-    ~/.tmux.conf: tmux/conf/tmux.conf
     ~/.config/kitty/kitty.conf: 
       path: kitty/kitty.conf
       create: true
