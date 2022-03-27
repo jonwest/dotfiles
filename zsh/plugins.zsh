@@ -34,7 +34,6 @@ zinit light-mode for \
 zinit light "zsh-users/zsh-autosuggestions"               # Use fish style autosuggestions
 zinit light "zsh-users/zsh-completions"                   # Add tab completion
 zinit light "zdharma-continuum/fast-syntax-highlighting"  # Speed that up
-zinit ice depth=1; zinit light "romkatv/powerlevel10k"    # Prefer powerline10k theme
 
 
 ####

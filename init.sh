@@ -17,9 +17,9 @@ if [[ ! $(echo $SHELL | awk '/zsh/') ]]; then
   fi
 fi
 
-# Set up Tmux plugins
-if [[ $(which tmux) ]]; then
-  . ${HOME}/.tmux/plugins/tpm/bin/install_plugins
+# Require starship
+if [[ ! $(which starship) ]]; then
+  curl -sS https://starship.rs/install.sh | sh
 fi
 
 # Set up NvChad if Neovim is available

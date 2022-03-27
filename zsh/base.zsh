@@ -43,9 +43,7 @@
 # ╚═══════════════════════╝
   include $DOTFILES/plugins.zsh
   include $DOTFILES/aliases.zsh
-  include $DOTFILES/p10k.zsh
   [[ $(uname) = Darwin ]] && include $DOTFILES/mac.zsh
   [[ ${REMOTE_CONTAINERS} ]] && include $DOTFILES/dev-container.zsh
 
-# Don't use tmux in a dev container
-  [[ ${TERM_PROGRAM} = vscode ]] || include $DOTFILES/tmux.zsh
+eval "$(starship init zsh)"

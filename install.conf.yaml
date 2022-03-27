@@ -4,7 +4,7 @@
 
 - clean: ['~']
 
-- link: 
+- link:
     ~/.zshrc: zsh/base.zsh
     ~/.tmux/plugins/tpm: 
       path: tmux/tpm
@@ -14,12 +14,20 @@
       path: kitty/kitty.conf
       create: true
       if: '[ `uname` = Darwin ]'
+    ~/.config/kitty/themes/:
+      path: kitty/themes/*conf
+      glob: true
+      create: true
+      if: '[ `uname` = Darwin ]'
     ~/.ansible/ansible.cfg: 
       path: ansible.cfg
       create: true
       if: '[ `which ansible` ]'
     ~/.config/nvim: 
       path: vim/NvChad
+      create: true
+    ~/.config/starship.toml:
+      path: starship/starship.toml
       create: true
 
 - shell:
