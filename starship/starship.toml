@@ -1,20 +1,17 @@
 format = """
-$username\
-$sudo\
-[](bg:#ee9b00 fg:#343a40)\
 $directory\
-[](fg:#ee9b00 bg:#ca6702)\
+[ ](fg:#343a40 bg:#ca6702)\
 $nodejs\
-[](fg:#ca6702 bg:#bb3e03)\
+[ ](fg:#ca6702 bg:#bb3e03)\
 $ruby\
-[](fg:#bb3e03)\
+[ ](bg:#2b2b2b fg:#bb3e03)\
 $fill\
-[](#343a40)\
+[](#343a40)\
 $kubernetes\
 $line_break\
 $git_branch\
 $git_status\
-[](fg:#168aad) 
+[](fg:#1d3557) 
 """
 
 right_format = """
@@ -31,7 +28,7 @@ symbol = ""
 disabled = false
 
 [character]
-style = "bg: #168aad"
+style = "bg: #1d3557"
 success_symbol = "[](#023e8a)"
 error_symbol = "[](#e63946)"
 vicmd_symbol = "[](#b5179e)"
@@ -42,12 +39,12 @@ vicmd_symbol = "[](#b5179e)"
 
 # You can also replace your username with a neat symbol like  to save some space
 [username]
-style_user = "bg:#343a40 fg:#6c757d bold"
+style_user = "bg:#343a40 fg:#343a40 bold"
 style_root = "bg:#005f73 bold"
 format = '[ $user ]($style)'
 
 [directory]
-style = "bg:#ee9b00 fg:#432818"
+style = "bg:#343a40 fg:#e0fbfc"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -67,20 +64,20 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#168aad fg:#22333b"
-format = '[ $symbol $branch]($style)'
+style = "bg:#1d3557 fg:#f1faee"
+format = '[[ $symbol]($style fg:#0096c7) $branch]($style)'
 
 [git_status]
-style = "bg:#168aad fg:#22333b"
-ahead = " [](bg:#168aad fg:#126782)$count"
-behind = " [](bg:#168aad fg:#126782)$count"
-deleted = " [﯊](bg:#168aad fg:#126782)$count"
-diverged = " [](bg:#168aad fg:#126782)"
-stashed = " [](bg:#168aad fg:#126782)$count"
-modified = " [](bg:#168aad fg:#126782)$count"
-staged = " [](bg:#168aad fg:#126782)$count"
-untracked = " [](bg:#168aad fg:#126782)$count"
-format = '[($all_status$ahead_behind)]($style)'
+style = "bg:#1d3557"
+ahead = " [[](bg:#1d3557 fg:#0096c7)$count](bg:#1d3557 fg:#f1faee)"
+behind = " [[](bg:#1d3557 fg:#0096c7)$count](bg:#1d3557 fg:#f1faee)"
+deleted = " [[﯊](bg:#1d3557 fg:#0096c7)$count](bg:#1d3557 fg:#f1faee)"
+diverged = " [](bg:#1d3557 fg:#0096c7)"
+stashed = " [[](bg:#1d3557 fg:#0096c7)$count](bg:#1d3557 fg:#f1faee)"
+modified = " [[](bg:#1d3557 fg:#0096c7)$count](bg:#1d3557 fg:#f1faee)"
+staged = " [[](bg:#1d3557 fg:#0096c7)$count](bg:#1d3557 fg:#f1faee)"
+untracked = " [[](bg:#1d3557 fg:#0096c7)$count](bg:#1d3557 fg:#f1faee)"
+format = '[($all_status$ahead_behind)](bg:#1d3557 fg:#f1faee)'
 
 [nodejs]
 symbol = ""
@@ -94,7 +91,7 @@ format = '[ $symbol ($version) ]($style)'
 
 [kubernetes]
 symbol = "⎈"
-style = "bg:#343a40 fg:#6c757d"
+style = "bg:#343a40 fg:#e0fbfc"
 format = '[ $symbol  $context ]($style)'
 disabled = false
 
@@ -104,6 +101,6 @@ disabled = false
 
 [time]
 disabled = false
-style = "fg:#343a40"
+style = "fg:#98c1d9"
 time_format = "%F %T"
 format = "[$time]($style)"
