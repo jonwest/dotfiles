@@ -5,6 +5,9 @@
 - clean: ['~']
 
 - link:
+    ~/.asdfrc: 
+      path: .asdfrc
+      if: '[ `which asdf` ]'
     ~/.zshrc: zsh/base.zsh
     ~/.config/kitty/kitty.conf: 
       path: kitty/kitty.conf
