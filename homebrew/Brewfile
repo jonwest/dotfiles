@@ -1,0 +1,27 @@
+tap "homebrew/cask"
+
+cask "authy"                    # TOTP MFA Helper
+cask "bitwarden"                # Self-Hosted Password Management
+cask "brave-browser"            # Privacy Conscious Chrome Alternative
+cask "caffeine"                 # Prevent Mac Sleep
+cask "cyberduck"                # FTP                
+cask "docker"                   # Container Management
+cask "hammerspoon"              # Lua Automation
+cask "itsycal"                  # Menu Bar Tiny Calendar
+cask "keka"                     # Unarchival Tool
+cask "kitty"                    # Performant Terminal Emulator
+cask "mos"                      # Extended Mouse Preferences
+cask "nextcloud"                # Self-hosted File/Calendar/Contact Sync
+cask "obsidian"                 # Self-hosted Document Management
+cask "raycast"                  # Spotlight Alternative
+cask "rectangle"                # Shortcut Focused Window Management
+cask "signal"                   # Secure Messenger
+cask "ultimaker-cura"           # 3D Print Management
+cask "visual-studio-code"       # Extendable IDE
+cask "vlc"                      # Open Source Video Player
+
+brew "asdf"     # Version Management for multiple applications
+brew "exa"      # Modern ls replacement written in Rust          
+brew "neovim"   # Modern vim fork
+brew "p7zip"    # 7zip Decompression
+brew "tldr"     # Simplified man pages
