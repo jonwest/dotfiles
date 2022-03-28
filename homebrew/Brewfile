@@ -20,7 +20,8 @@ cask "ultimaker-cura"           # 3D Print Management
 cask "visual-studio-code"       # Extendable IDE
 cask "vlc"                      # Open Source Video Player
 
-brew "asdf"     # Version Management for multiple applications
+brew "nvm"      # Node.js version management
+brew "rbenv"    # Ruby version management      
 brew "exa"      # Modern ls replacement written in Rust          
 brew "neovim"   # Modern vim fork
 brew "p7zip"    # 7zip Decompression
