@@ -9,6 +9,8 @@ ssh-add --apple-load-keychain &> /dev/null
 # Include Thinkific Specific helpers
 include ${DOTFILES}/thinkific.zsh
 
+# Add nvm
+include ${DOTFILES}/node.zsh
 
 # ┌───────────────────┐
 # │  ALIAS OVERRIDES  │
