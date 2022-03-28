@@ -1,3 +1,5 @@
+command_timeout = 1800000
+
 format = """
 $directory\
 [ ](fg:#343a40 bg:#ca6702)\
