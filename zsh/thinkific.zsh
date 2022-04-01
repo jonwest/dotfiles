@@ -45,44 +45,31 @@ function vpn {
     if [[ "$VPN" == "production" ]]; then VPN="prod"; fi
     if [[ "$VPN" == "stg" ]]; then VPN="staging"; fi
 
-    osascript -e "tell application \"/Applications/Tunnelblick.app\"" -e "${OP} \"thinkific-${VPN}\"" -e "end tell"
+    osascript -e "tell application \"/Applications/Tunnelblick.app\"" -e "${OP} \"${VPN}\"" -e "end tell"
 }
 
 # Get OVPN credentials
 function getvpn {
-    if [[ -z "$1" ]]; then
-        echo "Usage: \n\t getvpn (user_name)"
-        exit
-    fi
+  STAGING_IP="10.0.1.16"
+  PROD_IP="10.0.1.12"
 
-    # if [[ "$1" == "production" ]]; then CONNECTION="ec2-user@10.0.1.12"; fi
-    # if [[ "$1" == "staging" ]]; then CONNECTION="ec2-user@10.0.1.254"; fi
+  if [[ -z "$1" ]]; then
+    echo "Usage: \n\t getvpn (user_name)"
+    exit
+  fi
 
-    echo "Connecting and downloading OVPN file to $(pwd)/$1-staging.ovpn...";
-    vpn c staging;
-    sleep 5;
-    scp -o IdentitiesOnly=yes -i "~/.aws/thinkific-vpn-staging-us-east-1.pem" "ec2-user@10.0.1.16:~/$1.ovpn" "./$1-staging.ovpn"
-    vpn d staging;
-    sleep 5;
-    echo "Connecting and downloading OVPN file to $(pwd)/$1-production.ovpn...";
-    vpn c production;
-    sleep 5;
-    scp -o IdentitiesOnly=yes -i "~/.aws/thinkific-vpn-production-us-east-1.pem" "ec2-user@10.0.1.12:~/$1.ovpn" "./$1-production.ovpn"
-    vpn d staging;
+  echo "Connecting and downloading OVPN file to $(pwd)/$1-staging.ovpn...";
+  vpn c staging;
+  sleep 5;
+  scp -o IdentitiesOnly=yes -i "~/.aws/thinkific-vpn-staging-us-east-1.pem" "ec2-user@${STAGING_IP}:~/$1.ovpn" "./$1-staging.ovpn"
+  vpn d staging;
+  sleep 5;
+  echo "Connecting and downloading OVPN file to $(pwd)/$1-production.ovpn...";
+  vpn c production;
+  sleep 5;
+  scp -o IdentitiesOnly=yes -i "~/.aws/thinkific-vpn-production-us-east-1.pem" "ec2-user@${PROD_IP}:~/$1.ovpn" "./$1-production.ovpn"
+  vpn d staging;
 }
-
-
-
-# Powerlevel9k Tweaks
-typeset -g POWERLEVEL9K_AWS_CLASSES=(
-      '*think-pr*'  PROD    # These values are examples that are unlikely
-      '*think-st*'  STAGING    # to match your needs. Customize them as needed.
-      '*'           DEFAULT)
-typeset -g POWERLEVEL9K_KUBECONTEXT_CLASSES=(
-      '*pr*'  PROD       # These values are examples that are unlikely
-      '*st*'  STAGING    # to match your needs. Customize them as needed.
-      '*'     DEFAULT)
-
 
 ###
 # Terraform/Terragrunt
