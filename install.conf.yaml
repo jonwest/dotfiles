@@ -28,6 +28,9 @@
       path: starship/starship.toml
       create: true
     ~/.gitconfig: git.conf
+    ~/.ssh/config:
+      path: ssh.conf
+      if: '[ -f ~/.ssh/id_ed25519 ]'
     ~/.zshrc: zsh/base.zsh
 
 - shell:
