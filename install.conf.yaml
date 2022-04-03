@@ -37,6 +37,10 @@
       path: app-preferences/com.knollsoft.Rectangle.plist
       force: true
       if: '[ `uname` = Darwin ]'
+    ~/Library/Preferences/com.mowglii.ItsycalApp.plist:
+      path: app-preferences/com.mowglii.ItsycalApp.plist
+      force: true
+      if: '[ `uname` = Darwin ]'
     ~/.ssh/config:
       path: ssh.conf
       if: '[ -f ~/.ssh/id_ed25519 ]'
