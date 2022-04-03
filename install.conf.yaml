@@ -5,10 +5,13 @@
 - clean: ['~']
 
 - link:
+    ~/.ansible/ansible.cfg: 
+      path: ansible.cfg
+      create: true
+      if: '[ `which ansible` ]'
     ~/.asdfrc: 
       path: .asdfrc
       if: '[ `which asdf` ]'
-    ~/.zshrc: zsh/base.zsh
     ~/.config/kitty/kitty.conf: 
       path: kitty/kitty.conf
       create: true
@@ -18,16 +21,14 @@
       glob: true
       create: true
       if: '[ `uname` = Darwin ]'
-    ~/.ansible/ansible.cfg: 
-      path: ansible.cfg
-      create: true
-      if: '[ `which ansible` ]'
     ~/.config/nvim: 
       path: vim/NvChad
       create: true
     ~/.config/starship.toml:
       path: starship/starship.toml
       create: true
+    ~/.gitconfig: git.conf
+    ~/.zshrc: zsh/base.zsh
 
 - shell:
   - [git submodule update --init --recursive, Install submodules]
