@@ -23,7 +23,8 @@ cask "vlc"                      # Open Source Video Player
 
 brew "nvm"      # Node.js version management
 brew "rbenv"    # Ruby version management      
-brew "exa"      # Modern ls replacement written in Rust          
+brew "exa"      # Modern ls replacement written in Rust   
+brew "gh"       # Github CLI
 brew "neovim"   # Modern vim fork
 brew "p7zip"    # 7zip Decompression
 brew "tldr"     # Simplified man pages
