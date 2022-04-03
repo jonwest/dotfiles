@@ -1,4 +1,5 @@
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 
 cask "authy"                    # TOTP MFA Helper
 cask "bitwarden"                # Self-Hosted Password Management
@@ -28,3 +29,6 @@ brew "gh"       # Github CLI
 brew "neovim"   # Modern vim fork
 brew "p7zip"    # 7zip Decompression
 brew "tldr"     # Simplified man pages
+
+# Fonts
+cask "font-iosevka-nerd-font" 
