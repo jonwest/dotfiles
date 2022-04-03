@@ -16,6 +16,7 @@ cask "obsidian"                 # Self-hosted Document Management
 cask "raycast"                  # Spotlight Alternative
 cask "rectangle"                # Shortcut Focused Window Management
 cask "signal"                   # Secure Messenger
+cask "soundsource"              # Full system sound control
 cask "ultimaker-cura"           # 3D Print Management
 cask "visual-studio-code"       # Extendable IDE
 cask "vlc"                      # Open Source Video Player
