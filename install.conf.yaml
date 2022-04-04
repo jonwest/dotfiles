@@ -28,6 +28,27 @@
       path: starship/starship.toml
       create: true
     ~/.gitconfig: git.conf
+    ~/.hammerspoon/init.lua:
+      path: hammerspoon/init.lua
+      create: true
+      force: true
+      if: '[ `uname` = Darwin ]'
+    ~/Library/Preferences/com.brave.Browser.plist:
+      path: app-preferences/com.brave.Browser.plist
+      force: true
+      if: '[ `ls /Applications | grep -i brave | wc -l` -gt 0 ]'
+    ~/Library/Preferences/com.mowglii.ItsycalApp.plist:
+      path: app-preferences/com.mowglii.ItsycalApp.plist
+      force: true
+      if: '[ `ls /Applications | grep -i itsycal | wc -l` -gt 0 ]'
+    ~/Library/Preferences/com.knollsoft.Rectangle.plist:
+      path: app-preferences/com.knollsoft.Rectangle.plist
+      force: true
+      if: '[ `ls /Applications | grep -i rectangle | wc -l` -gt 0 ]'
+    ~/Library/Preferences/com.raycast.macos.plist:
+      path: app-preferences/com.raycast.macos.plist
+      force: true
+      if: '[ `ls /Applications | grep -i raycast | wc -l` -gt 0 ]'
     ~/.ssh/config:
       path: ssh.conf
       if: '[ -f ~/.ssh/id_ed25519 ]'

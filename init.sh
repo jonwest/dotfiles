@@ -9,3 +9,6 @@ fi
 if [[ $(which nvim) ]]; then
   nvim -c 'hi NormalFloat guibg=#1e222a' -c PackerSync -c "qa!"
 fi
+
+# Configure macOS preferences
+[[ $(uname) = Darwin ]] && source ./mac/mac-setup.sh
