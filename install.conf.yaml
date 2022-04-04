@@ -33,12 +33,20 @@
       create: true
       force: true
       if: '[ `uname` = Darwin ]'
-    ~/Library/Preferences/com.knollsoft.Rectangle.plist:
-      path: app-preferences/com.knollsoft.Rectangle.plist
+    ~/Library/Preferences/com.brave.Browser.plist:
+      path: app-preferences/com.brave.Browser.plist
       force: true
       if: '[ `uname` = Darwin ]'
     ~/Library/Preferences/com.mowglii.ItsycalApp.plist:
       path: app-preferences/com.mowglii.ItsycalApp.plist
+      force: true
+      if: '[ `uname` = Darwin ]'
+    ~/Library/Preferences/com.knollsoft.Rectangle.plist:
+      path: app-preferences/com.knollsoft.Rectangle.plist
+      force: true
+      if: '[ `uname` = Darwin ]'
+    ~/Library/Preferences/com.raycast.macos.plist:
+      path: app-preferences/com.raycast.macos.plist
       force: true
       if: '[ `uname` = Darwin ]'
     ~/.ssh/config:
