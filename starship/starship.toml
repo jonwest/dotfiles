@@ -14,7 +14,8 @@ $git_status\
 [](fg:#840032 bg:#e59500)\
 $kubernetes\
 [](fg:#002642 bg:#840032)\
-[ ](bg:#002642)\
+${custom.macos}\
+${custom.linux}\
 $line_break\
 $sudo\
 $character
@@ -92,3 +93,15 @@ disabled = false
 style = "fg:#6c757d"
 time_format = "%F %T"
 format = "[$time]($style)"
+
+[custom.macos]
+command = "echo ''"
+when = "$(true)"
+style = "bg:#002642 fg:#e6e9ec"
+os = "macos"
+
+[custom.linux]
+command = "echo ''"
+when = "$(true)"
+style = "bg:#002642 fg:#e6e9ec"
+os = "linux"
