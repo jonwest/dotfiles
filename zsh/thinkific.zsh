@@ -6,6 +6,9 @@
 #                                       
 
 export THINKIFICPATH="$HOME/Thinkific"
+
+source ${DOTFILES}/gambier.zsh
+
 alias kubestg="kubectl config use-context eks-st"
 alias kubeprod="kubectl config use-context eks-pr"
 
