@@ -31,6 +31,13 @@ echo "Setting trackpad tracking speed..."
 defaults write com.apple.trackpad.scaling -float 2.5
 echo -e "\tTrackpad speed set! \n"
 
+####
+## Mouse
+####
+echo "Setting mouse tracking speed..."
+defaults write com.apple.mouse.scaling -float 3
+echo -e "\tMouse tracking speed set! \n"
+
 
 ####
 ## Keyboard

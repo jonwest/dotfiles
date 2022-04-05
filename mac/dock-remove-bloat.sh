@@ -7,7 +7,6 @@ apps_to_remove=(
     'Launchpad'
     'Mail'
     'Safari'
-    'Calendar'
     'Contacts'
     'Notes'
     'Reminders'
