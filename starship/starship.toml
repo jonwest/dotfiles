@@ -53,7 +53,7 @@ truncation_symbol = "…/"
 [git_branch]
 symbol = ""
 style = "bg:#e59500 fg:#452d00"
-format = '[[ $symbol]($style fg:#5c3c00) $branch]($style bold)'
+format = '[[ $symbol]($style fg:#5c3c00) $branch ]($style bold)'
 
 [git_status]
 style = "bg:#e59500"
@@ -65,7 +65,7 @@ stashed = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
 modified = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
 staged = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
 untracked = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
-format = '[($all_status$ahead_behind)](bg:#e59500 fg:#452d00)'
+format = '[($all_status$ahead_behind) ](bg:#e59500 fg:#452d00)'
 
 [nodejs]
 symbol = ""
