@@ -25,9 +25,8 @@
       path: vim/NvChad
       create: true
     ~/.config/starship.toml:
-      path: starship/starship.mac.toml
+      path: starship/starship.toml
       create: true
-      if: '[ `uname` = Darwin ]'
     ~/.gitconfig: git.conf
     ~/.hammerspoon/init.lua:
       path: hammerspoon/init.lua

@@ -1,0 +1,94 @@
+command_timeout = 1800000
+
+format = """
+$directory\
+[](fg:#002642 bg:#840032)\
+$nodejs\
+[](fg:#840032 bg:#e59500)\
+$ruby\
+[](fg:#e59500)\
+$fill\
+[](fg:#e59500)\
+$git_branch\
+$git_status\
+[](fg:#840032 bg:#e59500)\
+$kubernetes\
+[](fg:#002642 bg:#840032)\
+[ ](bg:#002642)\
+$line_break\
+$sudo\
+$character
+"""
+
+right_format = "$time"
+
+[fill]
+symbol = " "
+
+[sudo]
+style = "bg:#002642 fg:#e59500"
+format = '[ $symbol ]($style)'
+symbol = "ﮊ" 
+disabled = false
+
+[directory]
+style = "bg:#002642 fg:#e6e9ec"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+# Keep in mind that the order matters. For example:
+# "Important Documents" = "  "
+# will not be replaced, because "Documents" was already substituted before.
+# So either put "Important Documents" before "Documents" or use the substituted version:
+# "Important  " = "  "
+
+[git_branch]
+symbol = ""
+style = "bg:#e59500 fg:#452d00"
+format = '[[ $symbol]($style fg:#5c3c00) $branch]($style bold)'
+
+[git_status]
+style = "bg:#e59500"
+ahead = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
+behind = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
+deleted = " [[﯊](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
+diverged = " [ ](bg:#e59500 fg:#5c3c00)"
+stashed = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
+modified = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
+staged = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
+untracked = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
+format = '[($all_status$ahead_behind)](bg:#e59500 fg:#452d00)'
+
+[nodejs]
+symbol = ""
+style = "bg:#840032 fg:#f3e6eb"
+format = '[ $symbol ($version) ]($style)'
+
+[ruby]
+symbol = ""
+style = "bg:#e59500 fg:#452d00"
+format = '[ $symbol ($version) ]($style)'
+
+[kubernetes]
+symbol = "⎈"
+style = "bg:#840032 fg:#f3e6eb"
+format = '[ $symbol  $context ]($style)'
+disabled = false
+
+[kubernetes.context_aliases]
+"eks-st" = "staging"
+"eks-pr" = "production"
+
+[time]
+disabled = false
+style = "fg:#6c757d"
+time_format = "%F %T"
+format = "[$time]($style)"
