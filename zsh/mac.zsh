@@ -1,16 +1,16 @@
 # ╔═══════════════════════╗
 # ║  MAC SPECIFIC CONFIG  ║
 # ╚═══════════════════════╝
-export KITTY_CONFIG_DIRECTORY="$HOME/Customization/dotfiles/kitty"
+export KITTY_CONFIG_DIRECTORY="${DOTFILES_FOLDER}/kitty"
 
 # Allow keychain access to ssh keys
 ssh-add --apple-load-keychain &> /dev/null
 
 # Include Thinkific Specific helpers
-include ${DOTFILES}/thinkific.zsh
+include ${ZSH_FOLDER}/thinkific.zsh
 
 # Add nvm
-include ${DOTFILES}/node.zsh
+include ${ZSH_FOLDER}/node.zsh
 
 # ┌───────────────────┐
 # │  ALIAS OVERRIDES  │

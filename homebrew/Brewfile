@@ -30,6 +30,7 @@ brew "nvm"          # Node.js version management
 brew "p7zip"        # 7zip Decompression
 brew "rbenv"        # Ruby version management      
 brew "tldr"         # Simplified man pages
+brew "mas"          # Mac App Store CLI
 
 # Fonts
 cask "font-iosevka-nerd-font" 

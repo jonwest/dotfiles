@@ -12,7 +12,9 @@
   bindkey -v  # Use vi-mode
   export LANG=en_US.UTF-8
   [[ $(which nvim) ]] && export EDITOR='nvim'
-  export DOTFILES="$HOME/Customization/dotfiles/zsh"
+
+  export DOTFILES_FOLDER="${HOME}/Customization/dotfiles"
+  export ZSH_FOLDER="${DOTFILES_FOLDER}/zsh"
 
 # Use zsh mv syntax (allow pattern matching)
 #   See: https://github.com/zsh-users/zsh/blob/master/Functions/Misc/zmv
@@ -41,9 +43,9 @@
 # ╔═══════════════════════╗
 # ║ LOAD IT ALL UP, CHIEF ║
 # ╚═══════════════════════╝
-  include $DOTFILES/plugins.zsh
-  include $DOTFILES/aliases.zsh
-  [[ $(uname) = Darwin ]] && include $DOTFILES/mac.zsh
-  [[ ${REMOTE_CONTAINERS} ]] && include $DOTFILES/dev-container.zsh
+  include $ZSH_FOLDER/plugins.zsh
+  include $ZSH_FOLDER/aliases.zsh
+  [[ $(uname) = Darwin ]] && include $ZSH_FOLDER/mac.zsh
+  [[ ${REMOTE_CONTAINERS} ]] && include $ZSH_FOLDER/dev-container.zsh
 
 eval "$(starship init zsh)"
