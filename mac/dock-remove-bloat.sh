@@ -30,7 +30,7 @@ apps_to_remove=(
 if [[ $(which dockutil) ]]; then
   echo "Removing default bloat apps from dock..."
   for app in "${apps_to_remove[@]}"; do
-    [[ $(dockutil --find "${app}") -eq 0 ]] && eval 'dockutil --remove "${app}" --no-restart'
+    [[ $(dockutil --find "${app}" | grep "not found") ]] || eval "dockutil --remove ${app} --no-restart"
   done
   
   echo "Restarting dock..."

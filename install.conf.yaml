@@ -12,12 +12,8 @@
     ~/.asdfrc: 
       path: .asdfrc
       if: '[ `which asdf` ]'
-    ~/.config/kitty/kitty.conf: 
-      path: kitty/kitty.conf
-      create: true
-      if: '[ `uname` = Darwin ]'
-    ~/.config/kitty/themes/:
-      path: kitty/themes/*conf
+    ~/.config/kitty/: 
+      path: kitty/**
       glob: true
       create: true
       if: '[ `uname` = Darwin ]'
