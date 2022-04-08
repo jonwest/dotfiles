@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+# ╔════════════════════╗
+# ║   Install macOS    ║
+# ║      Software      ║
+# ╚════════════════════╝
+
+# Install Homebrew
 if [[ ! $(which brew) ]]; then
   echo -e "Homebrew not installed, installing now..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

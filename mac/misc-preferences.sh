@@ -1,3 +1,10 @@
+#!/bin/zsh
+
+# ╔════════════════════╗
+# ║ Set Miscellaneous  ║
+# ║    Preferences     ║
+# ╚════════════════════╝
+
 # Disable personalized ads
 defaults write NSGlobalDomain com.apple.AdLib.allowApplePersonalizedAdvertising -int 0;
 

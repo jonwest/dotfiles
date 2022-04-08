@@ -1,5 +1,20 @@
 #!/bin/zsh
 
+#  ███╗   ███╗ █████╗  ██████╗ ██████╗ ███████╗
+#  ████╗ ████║██╔══██╗██╔════╝██╔═══██╗██╔════╝
+#  ██╔████╔██║███████║██║     ██║   ██║███████╗
+#  ██║╚██╔╝██║██╔══██║██║     ██║   ██║╚════██║
+#  ██║ ╚═╝ ██║██║  ██║╚██████╗╚██████╔╝███████║
+#  ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝
+#  ███████╗███████╗████████╗██╗   ██╗██████╗   
+#  ██╔════╝██╔════╝╚══██╔══╝██║   ██║██╔══██╗  
+#  ███████╗█████╗     ██║   ██║   ██║██████╔╝  
+#  ╚════██║██╔══╝     ██║   ██║   ██║██╔═══╝   
+#  ███████║███████╗   ██║   ╚██████╔╝██║       
+#  ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝       
+#                                              
+
+
 # Fail fast
 set -euo pipefail
 
@@ -20,13 +35,7 @@ include "${DOTFILES_INSTALLER}/mac/finder-preferences.sh"
 include "${DOTFILES_INSTALLER}/mac/dock-preferences.sh"
 include "${DOTFILES_INSTALLER}/mac/misc-preferences.sh"
 include "${DOTFILES_INSTALLER}/mac/software-installation.sh"
+include "${DOTFILES_INSTALLER}/mac/dock-remove-bloat.sh"
 
 # Unset failing fast
 set +euo pipefail
-
-# Run this after unsetting fail fast, because it won't let you "remove" apps that 
-# have already been removed and returns an error in this case, which we don't care
-# about.
-include "${DOTFILES_INSTALLER}/mac/dock-remove-bloat.sh"
-
-
