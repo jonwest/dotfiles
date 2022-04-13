@@ -33,10 +33,18 @@ zinit light-mode for \
 # └────────────────────────┘
 zinit light "zsh-users/zsh-autosuggestions"               # Use fish style autosuggestions
 zinit light "zsh-users/zsh-completions"                   # Add tab completion
-zinit light "zdharma-continuum/fast-syntax-highlighting"  # Speed that up
+zinit light "zdharma-continuum/fast-syntax-highlighting"  # Add syntax highlighting
 
 
 ####
 ## AUTOSUGGESTIONS
 ####
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+
+####
+## Syntax Highlighting
+####
+
+# Use the "clean" theme for syntax highlighting:
+[[ $(fast-theme -s | grep 'clean' ) ]] || fast-theme clean
