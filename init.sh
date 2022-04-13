@@ -16,3 +16,5 @@ fi
 [[ $(uname) = Darwin ]] && source ./mac/mac-setup.sh
 
 unset DOTFILES_INSTALLER
+
+
