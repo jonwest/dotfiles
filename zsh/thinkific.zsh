@@ -6,6 +6,7 @@
 #                                       
 
 export THINKIFICPATH="$HOME/Thinkific"
+export DEV_PACKAGES="zsh neovim"
 
 source ${ZSH_FOLDER}/gambier.zsh
 
