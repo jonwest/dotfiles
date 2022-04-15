@@ -12,6 +12,7 @@ cask "itsycal"                  # Menu Bar Tiny Calendar
 cask "keka"                     # Unarchival Tool
 cask "kitty"                    # Performant Terminal Emulator
 cask "mos"                      # Extended Mouse Preferences
+cask "mqtt-explorer"            # MQTT Client
 cask "nextcloud"                # Self-hosted File/Calendar/Contact Sync
 cask "obsidian"                 # Self-hosted Document Management
 cask "raycast"                  # Spotlight Alternative
