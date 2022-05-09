@@ -12,6 +12,8 @@
     ~/.asdfrc: 
       path: .asdfrc
       if: '[ `which asdf` ]'
+    ~/.bashrc: 
+      path: .bashrc
     ~/.config/kitty/: 
       path: kitty/**
       glob: true
