@@ -43,6 +43,9 @@
 # ╔═══════════════════════╗
 # ║ LOAD IT ALL UP, CHIEF ║
 # ╚═══════════════════════╝
+  # Don't output an error if machine specific overrides are not present
+  [[ -f "${HOME}/.machine_prefs" ]] && source "${HOME}/.machine_prefs"
+  
   include $ZSH_FOLDER/plugins.zsh
   include $ZSH_FOLDER/aliases.zsh
   [[ $(uname) = Darwin ]] && include $ZSH_FOLDER/mac.zsh

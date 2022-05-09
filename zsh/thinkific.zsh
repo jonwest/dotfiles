@@ -8,6 +8,12 @@
 export THINKIFICPATH="$HOME/Thinkific"
 export DEV_PACKAGES="zsh neovim"
 
+# Netskope fixes
+export AWS_CA_BUNDLE='/opt/homebrew/etc/ca-certificates/cert.pem'       # AWS SSL
+export GIT_SSL_CAINFO='/opt/homebrew/etc/ca-certificates/cert.pem'      # Git SSL
+export REQUESTS_CA_BUNDLE='/opt/homebrew/etc/ca-certificates/cert.pem'  # Python SSL
+export SSL_CERT_FILE='/opt/homebrew/etc/ca-certificates/cert.pem'       # Ruby SSL
+
 source ${ZSH_FOLDER}/gambier.zsh
 
 alias kubestg="kubectl config use-context eks-st"

@@ -7,7 +7,7 @@ export KITTY_CONFIG_DIRECTORY="${DOTFILES_FOLDER}/kitty"
 ssh-add --apple-load-keychain &> /dev/null
 
 # Include Thinkific Specific helpers
-include ${ZSH_FOLDER}/thinkific.zsh
+[[ ${THINKIFIC_MACHINE} ]] && include ${ZSH_FOLDER}/thinkific.zsh
 
 # Add nvm
 include ${ZSH_FOLDER}/node.zsh
