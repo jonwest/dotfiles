@@ -20,4 +20,7 @@ include ${ZSH_FOLDER}/node.zsh
 alias lt="exa -l -a -h --git --icons --color never -T -L 2"     # Show folder tree
 alias ll="exa -l -a -h --git --icons --color never"             # `ls` with icons
 
+# Lazygit convenience
+alias lg="lazygit"
+
 # --- END ALIASES ---
