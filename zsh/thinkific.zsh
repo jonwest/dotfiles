@@ -6,7 +6,7 @@
 #                                       
 
 export THINKIFICPATH="$HOME/Thinkific"
-export DEV_PACKAGES="zsh neovim"
+export DEV_PACKAGES="zsh neovim iputils-ping dnsutils"
 
 # Netskope fixes
 export AWS_CA_BUNDLE='/opt/homebrew/etc/ca-certificates/cert.pem'       # AWS SSL
