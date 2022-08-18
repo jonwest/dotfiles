@@ -9,6 +9,7 @@
 # └─────────────────────┘
 alias lt="ls -alh"
 alias ll="ls -alh"
+alias lsd="ls -d */"
 
 # ┌─────────────────────┐
 # │   VERSION CONTROL   │
