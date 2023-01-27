@@ -3,9 +3,8 @@ command_timeout = 1800000
 format = """
 $directory\
 [](fg:#002642 bg:#840032)\
-$nodejs\
-[](fg:#840032 bg:#e59500)\
-$ruby\
+($nodejs)\
+[($ruby)($php)](fg:#840032 bg:#e59500)\
 [](fg:#e59500)\
 $fill\
 [](fg:#e59500)\
@@ -75,6 +74,11 @@ format = '[ $symbol ($version) ]($style)'
 
 [ruby]
 symbol = ""
+style = "bg:#e59500 fg:#452d00"
+format = '[ $symbol ($version) ]($style)'
+
+[php]
+symbol = ""
 style = "bg:#e59500 fg:#452d00"
 format = '[ $symbol ($version) ]($style)'
 
