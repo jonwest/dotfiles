@@ -43,3 +43,16 @@ echo "Setting key repeat..."
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 echo -e "\tKey repeat set! \n"
+
+echo "Disabling period after two spaces..."
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -int 0
+echo -e "\tAutomatic period disabled! \n"
+
+echo "Disabling automatic capitalization..."
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -int 0
+echo -e "\tAutomatic period disabled! \n"
+
+echo "Disabling automatic spellcheck..."
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -int 0
+defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -int 0
+echo -e "\tAutomatic period disabled! \n"
