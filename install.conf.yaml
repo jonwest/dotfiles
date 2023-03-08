@@ -27,7 +27,6 @@
     ~/.config/starship.toml:
       path: starship/starship.toml
       create: true
-    ~/.gitconfig: git.conf
     ~/.hammerspoon/init.lua:
       path: hammerspoon/init.lua
       create: true
