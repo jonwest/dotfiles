@@ -48,7 +48,9 @@
   
   include $ZSH_FOLDER/plugins.zsh
   include $ZSH_FOLDER/aliases.zsh
+  include $ZSH_FOLDER/development.zsh
+  include $ZSH_FOLDER/node.zsh
   [[ $(uname) = Darwin ]] && include $ZSH_FOLDER/mac.zsh
   [[ ${REMOTE_CONTAINERS} ]] && include $ZSH_FOLDER/dev-container.zsh
 
-eval "$(starship init zsh)"
+  eval "$(starship init zsh)"
