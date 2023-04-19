@@ -83,14 +83,13 @@ style = "bg:#e59500 fg:#452d00"
 format = '[ $symbol ($version) ]($style)'
 
 [kubernetes]
-symbol = "⎈"
+symbol = "󱃾 "
 style = "bg:#840032 fg:#f3e6eb"
-format = '[ $symbol  $context ]($style)'
+format = '[ $symbol $context ]($style)'
 disabled = false
 
 [kubernetes.context_aliases]
-"eks-st" = "staging"
-"eks-pr" = "production"
+'gke_.*_(?P<var_cluster>[\w-]+)' = 'gke-$var_cluster'
 
 [time]
 disabled = false
