@@ -27,6 +27,9 @@ echo "Setting minimize into application icon behaviour..."
 defaults write com.apple.dock minimize-to-application -bool true
 echo -e "\tMinimize into application icon set! \n"
 
+# Minimize windows using the hidden "Suck" effect
+defaults write com.apple.dock mineffect -string suck;
+
 # System Preferences > Dock > Automatically hide and show the Dock:
 echo "Enabling dock auto-hide..."
 defaults write com.apple.dock autohide -bool true

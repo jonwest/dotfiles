@@ -1,8 +1,8 @@
-function gkestg {
-  echo "connecting to staging cluster"
-  gcloud config set project webapp-staging
-  gcloud container clusters get-credentials gke-webapp-staging --region=us-east1-b
-  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-staging.crt"
+function gkedata {
+  echo "connecting to data cluster"
+  gcloud config set project webapp-data
+  gcloud container clusters get-credentials gke-datascience --region=us-east1
+  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-data.crt"
 }
 
 function gkedo {
@@ -17,4 +17,11 @@ function gkeprod {
   gcloud config set project webapp-prod
   gcloud container clusters get-credentials gke-webapp-production --region=us-east1
   export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-production.crt"
+}
+
+function gkestg {
+  echo "connecting to staging cluster"
+  gcloud config set project webapp-staging
+  gcloud container clusters get-credentials gke-webapp-staging --region=us-east1-b
+  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-staging.crt"
 }

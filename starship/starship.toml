@@ -28,7 +28,7 @@ symbol = " "
 [sudo]
 style = "bg:#002642 fg:#e59500"
 format = '[ $symbol ]($style)'
-symbol = "ﮊ" 
+symbol = "󱑷" 
 disabled = false
 
 [directory]
@@ -40,15 +40,15 @@ truncation_symbol = "…/"
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
 [directory.substitutions]
-"Documents" = " "
+"Documents" = "󰈙 "
 "Downloads" = " "
 "Music" = " "
 "Pictures" = " "
 # Keep in mind that the order matters. For example:
-# "Important Documents" = "  "
+# "Important Documents" = " 󰈙 "
 # will not be replaced, because "Documents" was already substituted before.
 # So either put "Important Documents" before "Documents" or use the substituted version:
-# "Important  " = "  "
+# "Important 󰈙 " = " 󰈙 "
 
 [git_branch]
 symbol = ""
@@ -59,16 +59,16 @@ format = '[[ $symbol]($style fg:#5c3c00) $branch]($style bold)'
 style = "bg:#e59500"
 ahead = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
 behind = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
-deleted = " [[﯊](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
+deleted = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
 diverged = " [ ](bg:#e59500 fg:#5c3c00)"
-stashed = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
+stashed = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
 modified = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
 staged = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
 untracked = " [[ ](bg:#e59500 fg:#5c3c00)$count](bg:#e59500 fg:#452d00)"
 format = '[($all_status$ahead_behind) ](bg:#e59500 fg:#452d00)'
 
 [nodejs]
-symbol = ""
+symbol = "󰎙"
 style = "bg:#840032 fg:#f3e6eb"
 format = '[ $symbol ($version) ]($style)'
 
@@ -104,7 +104,7 @@ style = "bg:#002642 fg:#e6e9ec"
 os = "macos"
 
 [custom.linux]
-command = "echo ''"
+command = "echo '󰌽'"
 when = "$(true)"
 style = "bg:#002642 fg:#e6e9ec"
 os = "linux"

@@ -20,9 +20,9 @@ fi
 
 # Install Mac App Store packages
 #   Relies on 'mas', installed via Homebrew in the previous step
-if [[ $(which brew) ]]; then
-  if [[ $(mas list | grep 1451685025 | wc -l) -eq 0 ]]; then
-    echo "Installing Wireguard VPN..."
-    mas install 1451685025
-  fi
-fi
+# if [[ $(which brew) ]]; then
+#   if [[ $(mas list | grep 1451685025 | wc -l) -eq 0 ]]; then
+#     echo "Installing Wireguard VPN..."
+#     mas install 1451685025
+#   fi
+# fi

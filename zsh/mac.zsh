@@ -12,6 +12,9 @@ include ${ZSH_FOLDER}/node.zsh
 # Dev Container additional packages
 export DEV_PACKAGES="zsh python3"
 
+# Unfuck Slack
+launchctl setenv SLACK_DEVELOPER_MENU true
+
 # ┌───────────────────┐
 # │  ALIAS OVERRIDES  │
 # └───────────────────┘

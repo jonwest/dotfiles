@@ -1,7 +1,7 @@
 # ╔═══════════════════════════════════╗
 # ║   DEV CONTAINER SPECIFIC CONFIG   ║
 # ╚═══════════════════════════════════╝
-export EDITOR="code -w";
+export EDITOR="code --wait";
 
 # ┌───────────────────┐
 # │  ALIAS OVERRIDES  │
