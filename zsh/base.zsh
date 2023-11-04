@@ -19,6 +19,8 @@
 # Use zsh mv syntax (allow pattern matching)
 #   See: https://github.com/zsh-users/zsh/blob/master/Functions/Misc/zmv
   autoload zmv
+  autoload -Uz compinit
+  compinit
 
 # Use arrow keys to cycle through historical commands
   bindkey '\e[A' history-beginning-search-backward
@@ -45,6 +47,9 @@
 # ╚═══════════════════════╝
   # Don't output an error if machine specific overrides are not present
   [[ -f "${HOME}/.machine_prefs" ]] && source "${HOME}/.machine_prefs"
+
+  [[ -d "${HOME}/bin" ]] || mkdir -p "${HOME}/bin";
+  export PATH="${HOME}/bin:${PATH}";
   
   include $ZSH_FOLDER/plugins.zsh
   include $ZSH_FOLDER/aliases.zsh
