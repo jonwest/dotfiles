@@ -3,7 +3,11 @@
 # ╚═════════════════════╝
 
 # ZSH completion for Kubernetes
-[[ $(which kubectl) ]] && source <(kubectl completion zsh)
+if command -v kubectl >/dev/null 2>&1; then
+  source <(kubectl completion zsh);
+fi
 
 # Add composer packages to path
-[[ $(which composer) ]] && export PATH=${HOME}/.composer/vendor/bin:${PATH}
+if command -v composer >/dev/null 2>&1; then 
+  export PATH="${HOME}/.composer/vendor/bin:${PATH}";
+fi
