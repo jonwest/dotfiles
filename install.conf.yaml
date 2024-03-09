@@ -53,6 +53,9 @@
       if: '[ -f ~/.ssh/id_ed25519 ]'
     ~/.zshrc: zsh/base.zsh
 
+- create:
+  - ~/bin
+
 - shell:
   - [git submodule update --init --recursive, Install submodules]
   - command: ./init.sh

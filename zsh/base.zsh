@@ -47,8 +47,6 @@
 # ╚═══════════════════════╝
   # Don't output an error if machine specific overrides are not present
   [[ -f "${HOME}/.machine_prefs" ]] && source "${HOME}/.machine_prefs"
-
-  [[ -d "${HOME}/bin" ]] || mkdir -p "${HOME}/bin";
   export PATH="${HOME}/bin:${PATH}";
   
   include $ZSH_FOLDER/plugins.zsh
