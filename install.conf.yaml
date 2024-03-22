@@ -5,9 +5,6 @@
 - clean: ['~']
 
 - link:
-    ~/.local/share/zinit:
-      path: zsh/zinit
-      force: true    
     ~/.bashrc: 
       path: .bashrc
       force: true
@@ -49,7 +46,6 @@
   - ~/bin
 
 - shell:
-  - command: [git submodule update --init --recursive ./zsh/zinit]
   - command: ./init.sh
     stdin: true
     stderr: true

@@ -6,7 +6,7 @@
 # ┌────────────────────────┐
 # │  ZINIT INITIALIZATION  │
 # └────────────────────────┘
-export ZINIT_HOME="${ZSH_FOLDER}/zinit"
+export ZINIT_HOME="$HOME/.local/share/zinit";
 
 if ! [[ -f "${ZINIT_HOME}/zinit.git/zinit.zsh" ]]; then
   print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f";
@@ -24,7 +24,7 @@ autoload -Uz _zinit;
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-readurl \
     zdharma-continuum/zinit-annex-bin-gem-node \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust;
