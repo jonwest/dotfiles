@@ -16,10 +16,6 @@
       glob: true
       create: true
       if: '[ `uname` = Darwin ]'
-    ~/.config/nvim: 
-      path: vim/NvChad
-      create: true
-      if: '[ `uname` = Darwin ]'
     ~/.config/starship.toml:
       path: starship/starship.toml
       create: true
