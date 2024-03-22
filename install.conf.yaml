@@ -5,6 +5,9 @@
 - clean: ['~']
 
 - link:
+    ~/.local/share/zinit:
+      path: zsh/zinit
+      force: true    
     ~/.bashrc: 
       path: .bashrc
       force: true
