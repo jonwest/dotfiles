@@ -27,15 +27,17 @@ apps_to_remove=(
     'System Preferences'
 )
 
-if [[ $(which dockutil) ]]; then
-  echo "Removing default bloat apps from dock..."
-  for app in "${apps_to_remove[@]}"; do
-    [[ $(dockutil --find "${app}" | grep "not found") ]] || eval "dockutil --remove ${app} --no-restart"
-  done
-  
-  echo "Restarting dock..."
-  killall "Dock" > /dev/null 2>&1
-else
+if ! [[ $(command -v dockutil) ]]; then 
   echo "dockutil not installed, cannot remove dock bloat."
   echo "Install from: https://github.com/kcrawford/dockutil/releases"
 fi
+
+echo "Removing default bloat apps from dock..."
+for app in "${apps_to_remove[@]}"; do
+  [[ $(dockutil --find "${app}" | grep "not found") ]] || eval "dockutil --remove ${app} --no-restart"
+done
+
+echo "Restarting dock..."
+killall "Dock" > /dev/null 2>&1
+
+
