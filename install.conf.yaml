@@ -53,6 +53,7 @@
   - ~/bin
 
 - shell:
+  - command: [git submodule update --init --recursive ./zsh/zinit]
   - command: ./init.sh
     stdin: true
     stderr: true
