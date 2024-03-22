@@ -13,4 +13,6 @@ if command -v composer >/dev/null 2>&1; then
 fi
 
 # GPT4 API
-[[ -f "${HOME}/.secrets/shellgpt.key" ]] && export OPENAI_API_KEY=$(cat "${HOME}/.secrets/shellgpt.key");
+if [[ -f "${HOME}/.secrets/shellgpt.key" ]]; then
+  export OPENAI_API_KEY=$(cat "${HOME}/.secrets/shellgpt.key");
+fi
