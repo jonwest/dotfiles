@@ -51,6 +51,7 @@
   
   include $ZSH_FOLDER/plugins.zsh
   include $ZSH_FOLDER/aliases.zsh
+  include $ZSH_FOLDER/heading-generators.zsh
   include $ZSH_FOLDER/development.zsh
   include $ZSH_FOLDER/node.zsh
   [[ $(uname) = Darwin ]] && include $ZSH_FOLDER/mac.zsh
