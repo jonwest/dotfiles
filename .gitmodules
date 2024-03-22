@@ -8,3 +8,19 @@
 [submodule "tmux/tpm"]
 	path = tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "zsh/zinit/zinit.git"]
+  path = zsh/zinit/zinit.git
+  url = https://github.com/zdharma-continuum/zinit
+  ignore = dirty
+[submodule "zsh/zinit/plugins/zdharma-continuum---fast-syntax-highlighting"]
+  path = zsh/zinit/plugins/zdharma-continuum---fast-syntax-highlighting
+  url = https://github.com/zdharma-continuum/fast-syntax-highlighting
+  ignore = dirty
+[submodule "zsh/zinit/plugins/zsh-users---zsh-autosuggestions"]
+  path = zsh/zinit/plugins/zsh-users---zsh-autosuggestions
+  url = https://github.com/zsh-users/zsh-autosuggestions
+  ignore = dirty
+[submodule "zsh/zinit/plugins/zsh-users---zsh-completions"]
+  path = zsh/zinit/plugins/zsh-users---zsh-completions
+  url = https://github.com/zsh-users/zsh-completions
+  ignore = dirty
