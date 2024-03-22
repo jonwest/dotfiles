@@ -26,3 +26,8 @@ npx() {
   lazynvm
   npx $@
 }
+
+yarn() {
+  lazynvm
+  yarn $@
+}
