@@ -5,9 +5,6 @@
 - clean: ['~']
 
 - link:
-    ~/.asdfrc: 
-      path: .asdfrc
-      if: '[ `which asdf` ]'
     ~/.bashrc: 
       path: .bashrc
       force: true
