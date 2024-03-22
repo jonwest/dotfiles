@@ -22,6 +22,3 @@ end
 
 -- Kitty Hide/Show
 hs.hotkey.bind({ "cmd" }, '`', function() focusOrHide('kitty') end)
-
--- Open Obsidian to Today's Note for Quick Note taking
-hs.hotkey.bind({ "cmd", "shift" }, 'O', function() focusOrHide('Obsidian') end)
