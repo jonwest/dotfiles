@@ -54,6 +54,7 @@
   include $ZSH_FOLDER/heading-generators.zsh;
   include $ZSH_FOLDER/development.zsh;
   include $ZSH_FOLDER/node.zsh;
+  [[ $(hostname) = "0419-MBP-M1P" ]] && include $ZSH_FOLDER/7shifts.zsh;
   [[ $(uname) = Darwin ]] && include $ZSH_FOLDER/mac.zsh;
   [[ ${REMOTE_CONTAINERS} ]] && include $ZSH_FOLDER/dev-container.zsh;
 
