@@ -39,3 +39,13 @@ function gkestg {
   gcloud container clusters get-credentials gke-webapp-staging --region=us-east1-b
   export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-staging.crt"
 }
+
+function setnamespace {
+  local namespace=$1;
+  echo "Setting namespace to '${namespace}'";
+  kubectl config set-context --current --namespace=${namespace};
+}
+
+function getnamespace {
+  kubectl config view --minify | grep namespace:
+}
