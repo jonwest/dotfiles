@@ -29,10 +29,6 @@
       path: app-preferences/com.mowglii.ItsycalApp.plist
       force: true
       if: '[ `ls /Applications | grep -i itsycal | wc -l` -gt 0 ]'
-    ~/Library/Preferences/com.knollsoft.Rectangle.plist:
-      path: app-preferences/com.knollsoft.Rectangle.plist
-      force: true
-      if: '[ `ls /Applications | grep -i rectangle | wc -l` -gt 0 ]'
     ~/Library/Preferences/com.raycast.macos.plist:
       path: app-preferences/com.raycast.macos.plist
       force: true
