@@ -36,4 +36,4 @@ brew "p7zip"        # 7zip Decompression
 brew "tldr"         # Simplified man pages
 
 # Fonts
-cask "font-iosevka-nerd-font"
+cask "font-fantasque-sans-mono-nerd-font"
