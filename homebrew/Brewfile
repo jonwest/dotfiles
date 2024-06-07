@@ -1,24 +1,25 @@
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 
-cask "monitorcontrol"           # Allows better control of ext. monitor settings
 cask "caffeine"                 # Prevent Mac Sleep
 cask "clocker"                  # Timezones displayed in menu bar
 cask "cyberduck"                # FTP                
-cask "orbstack"                 # Container Management
-cask "microsoft-edge"           # This still feels weird...
+cask "grandperspective"         # Disk Usage Visualization
 cask "hammerspoon"              # Lua Automation
-cask "itsycal"                  # Menu Bar Tiny Calendar
-cask "keka"                     # Unarchival Tool
+cask "itsycal"                  # Tiny Menu Bar Calendar
+cask "keka"                     # Archival Tool
 cask "kitty"                    # Performant Terminal Emulator
+cask "microsoft-edge"           # This still feels weird...
+cask "monitorcontrol"           # Allows better control of ext. monitor settings
 cask "mos"                      # Extended Mouse Preferences
 cask "mqtt-explorer"            # MQTT Client
 cask "nextcloud"                # Self-hosted File/Calendar/Contact Sync
 cask "notion"                   # Journaling and Object DB
 cask "obsidian"                 # Self-hosted Document Management
-cask "sol"                      # Spotlight Alternative
+cask "orbstack"                 # Container Management
 cask "rectangle"                # Shortcut Focused Window Management
 cask "signal"                   # Secure Messenger
+cask "sol"                      # Spotlight Alternative
 cask "soundsource"              # Full system sound control
 cask "visual-studio-code"       # Extendable IDE
 cask "vlc"                      # Open Source Video Player
