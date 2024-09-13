@@ -47,7 +47,7 @@
 # ╚═══════════════════════╝
   # Don't output an error if machine specific overrides are not present
   [[ -f "${HOME}/.machine_prefs" ]] && source "${HOME}/.machine_prefs";
-  export PATH="${HOME}/bin:${PATH}";
+  export PATH="${HOME}/bin:${HOME}/.local/bin:${PATH}";
   
   [[ ${REMOTE_CONTAINERS} ]] || include $ZSH_FOLDER/plugins.zsh;
   include $ZSH_FOLDER/aliases.zsh;
