@@ -138,3 +138,16 @@ function gha_avg() {
     printf "%s: %.2f seconds\n" "$job" "$average"
   done
 }
+
+
+function ssm() {
+  if [[ -z "$1" ]]; then
+    echo "ssm: Connect to an AWS SSM instance";
+    echo "Usage: ssm <instance_id>";
+    exit 1;
+  else
+    local instance_id="$1";
+  fi
+
+  aws ssm --region us-east-1 start-session --target $instance_id;
+}
