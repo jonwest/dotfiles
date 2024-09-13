@@ -17,6 +17,7 @@ alias lsd="ll -d */"
 # └─────────────────────┘
 alias lg="lazygit"
 
+
 git_gc() {
   # Check if the parent directory is provided
   if [ -z "$1" ]; then

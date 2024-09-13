@@ -59,4 +59,4 @@
   [[ ${REMOTE_CONTAINERS} ]] && include $ZSH_FOLDER/dev-container.zsh;
 
   eval "$(starship init zsh)";
-eval "$(direnv hook zsh)"
+  eval "$(direnv hook zsh)"
