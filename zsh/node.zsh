@@ -1,38 +1,19 @@
-lazynvm() {
-  export NVM_DIR=${HOME}/.nvm
+###
+# ┌──────────────────────────────────────────────┐
+# │                 NODE HELPERS                 │
+# └──────────────────────────────────────────────┘
+###
 
-  [ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"  # This loads nvm
-  if [ -f "${NVM_DIR}/etc/bash_completion.d/nvm" ]; then
-    [ -s "${NVM_DIR}/etc/bash_completion.d/nvm" ] && \. "${NVM_DIR}/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+if [[ -d "${HOME}/.nvm" ]]; then
+  export NVM_DIR="$HOME/.nvm"
+  
+  # Linux
+  if [[ -s "${NVM_DIR}/nvm.sh" ]]; then 
+    . "${NVM_DIR}/nvm.sh";
   fi
-}
 
-nvm() {
-  unset -f nvm
-  lazynvm 
-  nvm $@
-}
-
-node() {
-  unset -f node
-  lazynvm
-  node $@
-}
-
-npm() {
-  unset -f npm
-  lazynvm
-  npm $@
-}
-
-npx() {
-  unset -f npx
-  lazynvm
-  npx $@
-}
-
-yarn() {
-  unset -f yarn
-  lazynvm
-  yarn $@
-}
+  # macOS
+  if [[ $(uname) = Darwin ]] && [[ -s "$(brew --prefix nvm)/nvm.sh" ]]; then
+    source $(brew --prefix nvm)/nvm.sh;
+  fi
+fi
