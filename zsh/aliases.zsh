@@ -2,6 +2,7 @@
 # ║   UNIVERSAL ALIASES   ║
 # ╚═══════════════════════╝
 [[ $(which nvim) ]] && alias vim="nvim"
+[[ $(which terraform) ]] && alias tf="terraform"
 
 
 # ┌─────────────────────┐
