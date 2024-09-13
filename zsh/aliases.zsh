@@ -42,3 +42,31 @@ git_gc() {
 
   echo "Completed running 'git gc' in all git repositories.";
 }
+
+# Get the size of a Docker image without pulling it
+get_image_size() {
+  local image=$1
+
+  if [ -z "$image" ]; then
+    echo "Usage: get_image_size <image>"
+    return 1
+  fi
+
+  # Fetch the manifest list and extract the digest for the amd64 image
+  local amd64_digest=$(docker manifest inspect "$image" | jq -r '.manifests[] | select(.platform.architecture == "amd64") | .digest')
+
+  if [ -z "$amd64_digest" ]; then
+    echo "Failed to find an amd64 image for the given image."
+    return 1
+  fi
+
+  # Fetch the amd64 image manifest and sum the sizes of the layers
+  local total_size=$(docker manifest inspect "$image@$amd64_digest" | jq '[.layers[].size] | add')
+
+  if [ -z "$total_size" ]; then
+    echo "Failed to get the image size. Make sure the image exists and you have access to it."
+    return 1
+  fi
+
+  echo "Total size: $(numfmt --to=iec-i --suffix=B $total_size)"
+}
