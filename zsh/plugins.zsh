@@ -34,8 +34,8 @@ zinit light-mode for \
 # ┌────────────────────────┐
 # │   UNIVERSAL PLUGINS    │
 # └────────────────────────┘
-zinit light "zsh-users/zsh-autosuggestions"               # Use fish style autosuggestions
-zinit light "zsh-users/zsh-completions"                   # Add tab completion
+zinit light "zsh-users/zsh-autosuggestions";               # Use fish style autosuggestions
+zinit light "zsh-users/zsh-completions";                   # Add tab completion
 zinit light "zdharma-continuum/fast-syntax-highlighting";   # Add syntax highlighting
 
 

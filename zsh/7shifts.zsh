@@ -16,31 +16,31 @@ function get_cloudflare_workers() {
 # Changing Kubernetes Clusters
 ###
 function gkedata {
-  echo "connecting to data cluster"
-  gcloud config set project webapp-data
-  gcloud container clusters get-credentials gke-datascience --region=us-east1
-  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-data.crt"
+  echo "connecting to data cluster";
+  gcloud config set project webapp-data;
+  gcloud container clusters get-credentials gke-datascience --region=us-east1;
+  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-data.crt";
 }
 
 function gkedo {
-  echo "connecting to devops cluster"
-  gcloud config set project webapp-devops
-  gcloud container clusters get-credentials admin --region=us-east1
-  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-devops.crt"
+  echo "connecting to devops cluster";
+  gcloud config set project webapp-devops;
+  gcloud container clusters get-credentials admin --region=us-east1;
+  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-devops.crt";
 }
 
 function gkeprod {
-  echo "connecting to prod cluster"
-  gcloud config set project webapp-prod
-  gcloud container clusters get-credentials gke-webapp-production --region=us-east1
-  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-production.crt"
+  echo "connecting to prod cluster";
+  gcloud config set project webapp-prod;
+  gcloud container clusters get-credentials gke-webapp-production --region=us-east1;
+  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-production.crt";
 }
 
 function gkestg {
-  echo "connecting to staging cluster"
-  gcloud config set project webapp-staging
-  gcloud container clusters get-credentials gke-webapp-staging --region=us-east1-b
-  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-staging.crt"
+  echo "connecting to staging cluster";
+  gcloud config set project webapp-staging;
+  gcloud container clusters get-credentials gke-webapp-staging --region=us-east1-b;
+  export SEALED_SECRETS_CERT="$HOME/.secrets/webapp-staging.crt";
 }
 
 ###
@@ -106,27 +106,27 @@ function gha_avg() {
   fi
 
   # Get workflow runs
-  runs=$(gh api -X GET "repos/$repo/actions/runs" --paginate -F status=completed -F conclusion=success -F per_page=$page_limit | jq -r ".workflow_runs[] | select(.name == \"$workflow_name\") | .id")
+  runs=$(gh api -X GET "repos/$repo/actions/runs" --paginate -F status=completed -F conclusion=success -F per_page=$page_limit | jq -r ".workflow_runs[] | select(.name == \"$workflow_name\") | .id");
 
-  declare -A job_durations
-  declare -A job_counts
+  declare -A job_durations;
+  declare -A job_counts;
 
   # Iterate through each run and accumulate job runtimes
   echo "$runs" | while read -r run_id; do
-    echo "Processing run ID: $run_id" # Debugging output
-    jobs=$(gh api -X GET "repos/$repo/actions/runs/$run_id/jobs" | jq -c '.jobs[] | {name: .name, duration: (.completed_at | fromdateiso8601 - (.started_at | fromdateiso8601))}')
+    echo "Processing run ID: $run_id"; # Debugging output
+    jobs=$(gh api -X GET "repos/$repo/actions/runs/$run_id/jobs" | jq -c '.jobs[] | {name: .name, duration: (.completed_at | fromdateiso8601 - (.started_at | fromdateiso8601))}');
     
-    echo "Jobs for run ID $run_id: $jobs" # Debugging output
+    echo "Jobs for run ID $run_id: $jobs"; # Debugging output
     
     for job in $(echo "$jobs"); do
-      name=$(echo "$job" | jq -r '.name')
-      duration=$(echo "$job" | jq -r '.duration')
+      name=$(echo "$job" | jq -r '.name');
+      duration=$(echo "$job" | jq -r '.duration');
       
       if [[ -n "$name" && -n "$duration" ]]; then
-        job_durations["$name"]=$(echo "${job_durations["$name"]} + $duration" | bc)
-        job_counts["$name"]=$((job_counts["$name"] + 1))
+        job_durations["$name"]=$(echo "${job_durations["$name"]} + $duration" | bc);
+        job_counts["$name"]=$((job_counts["$name"] + 1));
       else
-        echo "Skipping invalid job entry: $job" # Debugging output
+        echo "Skipping invalid job entry: $job"; # Debugging output
       fi
     done
   done
@@ -134,8 +134,8 @@ function gha_avg() {
   # Calculate and print average durations
   echo "Average durations per job:"
   for job in "${!job_durations[@]}"; do
-    average=$(echo "${job_durations[$job]} / ${job_counts[$job]}" | bc -l)
-    printf "%s: %.2f seconds\n" "$job" "$average"
+    average=$(echo "${job_durations[$job]} / ${job_counts[$job]}" | bc -l);
+    printf "%s: %.2f seconds\n" "$job" "$average";
   done
 }
 
