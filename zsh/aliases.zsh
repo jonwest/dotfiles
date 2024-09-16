@@ -3,6 +3,7 @@
 # ╚═══════════════════════╝
 [[ $(which nvim) ]] && alias vim="nvim"
 [[ $(which terraform) ]] && alias tf="terraform"
+[[ $(which kubecolor) ]] && alias kubectl="kubecolor";
 
 
 # ┌─────────────────────┐

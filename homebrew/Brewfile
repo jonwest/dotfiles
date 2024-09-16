@@ -35,5 +35,8 @@ brew "nvm"          # Node.js version management
 brew "p7zip"        # 7zip Decompression
 brew "tldr"         # Simplified man pages
 
+brew "kubectl"      # Kubernetes CLI
+brew "kubecolor"    # Colorized kubectl output
+
 # Fonts
 cask "font-fantasque-sans-mono-nerd-font"
