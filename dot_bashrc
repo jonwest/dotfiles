@@ -1,0 +1,14 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls="ls --color=auto"
+alias grep="grep --color=auto"
+export PS1="[\[\e[36m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]]:\W \\$ "
+
+alias pbcopy="wl-copy"
+
+eval "$(starship init bash)"
