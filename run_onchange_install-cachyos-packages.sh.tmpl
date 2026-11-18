@@ -1,0 +1,21 @@
+{{- if and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "cachyos") }}
+#!/usr/bin/env bash
+set -euo pipefail
+sudo pacman -S --noconfirm --needed paru
+
+packages=(
+  docker
+  git
+  kio-extras
+  lutris
+  neovim
+  p7zip
+  ripgrep
+  sshfs
+  starship
+  visual-studio-code-bin
+  wl-clipboard
+)
+
+paru -S --needed --noconfirm "${packages[@]}"
+{{- end }}
