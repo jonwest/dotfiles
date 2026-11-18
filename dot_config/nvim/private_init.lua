@@ -69,3 +69,16 @@ vim.keymap.set('n', '<leader>?', function()
   vim.cmd.vsplit(vim.fn.stdpath('config') .. '/cheatsheet.md')
   vim.bo.readonly = true
 end, { desc = 'Open motions cheat sheet' })
+
+-- Plugins ---------------------------------------------------------------------
+-- lazy.nvim installs and loads plugins. Each file in lua/plugins/ describes
+-- one plugin. :Lazy opens a window to see, update or remove them, and the
+-- exact versions in use are pinned in lazy-lock.json next to this file.
+-- The first launch downloads everything, which takes a few seconds.
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.uv.fs_stat(lazypath) then
+  vim.fn.system({ 'git', 'clone', '--filter=blob:none', '--branch=stable',
+    'https://github.com/folke/lazy.nvim.git', lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
+require('lazy').setup('plugins')
