@@ -1,0 +1,20 @@
+{{- if and (eq .chezmoi.os "android") }}
+#!/usr/bin/env bash
+set -euo pipefail
+
+packages=(
+  termux-api
+  termux-styling
+  jq
+  inetutils
+  git
+  neovim
+  p7zip
+  ripgrep
+  starship
+)
+
+pkg upgrade -y
+pkg install -y "${packages[@]}"
+
+{{- end }}
