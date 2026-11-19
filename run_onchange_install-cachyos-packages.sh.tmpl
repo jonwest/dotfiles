@@ -1,7 +1,9 @@
-{{- if and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "cachyos") }}
 #!/usr/bin/env bash
-set -euo pipefail
-sudo pacman -S --noconfirm --needed paru
+# vim: ft=sh
+
+set -euo pipefile
+
+{{ if and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "cachyos") -}}
 
 packages=(
   docker
@@ -17,5 +19,18 @@ packages=(
   wl-clipboard
 )
 
-paru -S --needed --noconfirm "${packages[@]}"
+sudo -v
+
+sudo pacman -Sy --needed --noconfirm paru
+
+paru -Sy --needed --noconfirm --sudoloop "${packages[@]}"
+
+sudo systemctl enable --now docker.service
+if ! id -nG "$USER" | grep -qw docker; then
+  sudo usermod -aG docker "$USER"
+  echo "Added $USER to the docker group.  Log out and back in to apply."
+fi
+
+{{ else -}}
+echo "install-cachyos-packages: not a CachyOS system, skipping." >&2
 {{- end }}

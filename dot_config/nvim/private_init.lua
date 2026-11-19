@@ -82,3 +82,12 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup('plugins')
+
+-- Filetypes ---------
+vim.filetype.add({
+  pattern = {
+    [".*%.tmpl"] = function(path)
+      return vim.filetype.match({ filename = (path:gsub("%.tmpl$", "")) })
+    end,
+  },
+})
