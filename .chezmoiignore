@@ -1,0 +1,3 @@
+{{- if eq .chezmoi.os "android" }}
+install-cachyos-packages.sh
+{{- end }}

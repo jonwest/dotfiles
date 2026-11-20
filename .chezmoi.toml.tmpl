@@ -1,0 +1,6 @@
+{{- /* Termux has no /usr/bin/env, and chezmoi (Go) bypasses termux-exec's
+       shebang rewriting, so run .sh scripts through Termux's bash. */ -}}
+{{- if eq .chezmoi.os "android" }}
+[interpreters.sh]
+    command = "bash"
+{{- end }}
