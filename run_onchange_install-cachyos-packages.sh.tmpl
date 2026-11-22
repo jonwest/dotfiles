@@ -7,8 +7,10 @@ set -euo pipefail
 
 packages=(
   docker
+  docker-compose
   git
   kio-extras
+  lazygit
   lutris
   neovim
   p7zip
@@ -21,9 +23,9 @@ packages=(
 
 sudo -v
 
-sudo pacman -Sy --needed --noconfirm paru
+sudo pacman -Syu --needed --noconfirm paru
 
-paru -Sy --needed --noconfirm --sudoloop "${packages[@]}"
+paru -S --needed --noconfirm --sudoloop "${packages[@]}"
 
 sudo systemctl enable --now docker.service
 if ! id -nG "$USER" | grep -qw docker; then

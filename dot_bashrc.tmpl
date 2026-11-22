@@ -8,7 +8,6 @@
 alias ls="ls --color=auto"
 alias ll='ls -alh'
 alias grep="grep --color=auto"
-export PS1="[\[\e[36m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]]:\W \\$ "
 
 {{- if (eq .chezmoi.os "android") }}
   alias pbcopy="termux-clipboard-set"
@@ -16,4 +15,8 @@ export PS1="[\[\e[36m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]]:\W \\$ "
   alias pbcopy="wl-copy"
 {{- end }}
 
-eval "$(starship init bash)"
+if [[ $(which starship) ]]; then 
+  eval "$(starship init bash)"
+else
+  export PS1="[\[\e[36m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]]:\W \\$ "
+fi
