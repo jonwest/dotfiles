@@ -30,6 +30,7 @@ packages:
     - easyeffects
     - kio-extras
     - lutris
+    - signal-desktop
     - sshfs
     - visual-studio-code-bin
     - wl-clipboard
