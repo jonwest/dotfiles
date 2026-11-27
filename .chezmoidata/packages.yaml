@@ -25,6 +25,7 @@ packages:
     - { termux: termux-api }
 
   desktop:
+    - brave-bin
     - docker
     - docker-compose
     - easyeffects
