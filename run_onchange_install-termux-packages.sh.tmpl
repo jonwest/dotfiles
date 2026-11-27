@@ -2,17 +2,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Package list: .chezmoidata/packages.yaml (cli only).
 packages=(
-  termux-api
-  jq
-  inetutils
-  lazygit
-  git
-  neovim
-  p7zip
-  ripgrep
-  starship
-  rsync
+{{- range .packages.cli }}
+{{-   if kindIs "string" . }}
+  {{ . }}
+{{-   else if hasKey . "termux" }}
+  {{ .termux }}
+{{-   end }}
+{{- end }}
 )
 
 pkg upgrade -y

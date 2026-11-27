@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+# pkgadd: install a package on this machine and record it in the dotfiles.
+#
+#   pkgadd [--cli | --desktop] [--arch NAME] [--termux NAME] [--no-push] PACKAGE
+#
+#   --cli          terminal tool: installed on CachyOS and Termux
+#   --desktop      GUI app or service: installed on CachyOS only
+#   --arch NAME    name on Arch/CachyOS, if it differs from PACKAGE
+#   --termux NAME  name on Termux, if it differs from PACKAGE
+#   --arch-only    (cli) skip it on Termux
+#   --termux-only  (cli) skip it on Arch/CachyOS
+#   --no-push      commit, but don't push
+#
+# With no --cli or --desktop it asks.  The list lives in
+# .chezmoidata/packages.yaml in the dotfiles repo; set DOTFILES_DIR to point
+# somewhere else if the repo is not managed by chezmoi.
+
+set -euo pipefail
+
+usage() { sed -n '2,16s/^# \{0,1\}//p' "$0"; exit "${1:-0}"; }
+die() { echo "pkgadd: $*" >&2; exit 1; }
+
+section="" arch_name="" termux_name="" arch_only=0 termux_only=0 push=1 pkg=""
+while (($#)); do
+  case "$1" in
+    --cli) section=cli ;;
+    --desktop) section=desktop ;;
+    --arch) arch_name="${2:?--arch needs a name}"; shift ;;
+    --termux) termux_name="${2:?--termux needs a name}"; shift ;;
+    --arch-only) arch_only=1 ;;
+    --termux-only) termux_only=1 ;;
+    --no-push) push=0 ;;
+    -h|--help) usage ;;
+    -*) echo "pkgadd: unknown option $1" >&2; usage 1 ;;
+    *) [[ -z $pkg ]] || die "one package at a time"; pkg="$1" ;;
+  esac
+  shift
+done
+[[ -n $pkg ]] || usage 1
+
+if [[ -n ${TERMUX_VERSION:-} || ${PREFIX:-} == *com.termux* ]]; then
+  os=termux
+else
+  os=arch
+fi
+
+if [[ -z $section ]]; then
+  if [[ $os == termux ]]; then
+    section=cli
+  else
+    read -rp "Also install '$pkg' on Termux? (y = cli, n = desktop only) [y/N] " ans
+    [[ $ans == [yY]* ]] && section=cli || section=desktop
+  fi
+fi
+[[ $section == desktop && $os == termux ]] && die "desktop packages are not installed on Termux"
+[[ $section == desktop && ( -n $termux_name || $termux_only == 1 ) ]] && die "desktop packages have no Termux name"
+((arch_only && termux_only)) && die "--arch-only and --termux-only together means nowhere"
+
+: "${arch_name:=$pkg}" "${termux_name:=$pkg}"
+((arch_only)) && termux_name=""
+((termux_only)) && arch_name=""
+[[ $section == desktop ]] && termux_name=""
+
+# The YAML entry: a plain name when it's the same everywhere it's installed.
+if [[ $section == desktop ]]; then
+  entry="$arch_name"
+elif [[ -n $arch_name && $arch_name == "$termux_name" ]]; then
+  entry="$arch_name"
+else
+  parts=()
+  [[ -n $arch_name ]] && parts+=("arch: $arch_name")
+  [[ -n $termux_name ]] && parts+=("termux: $termux_name")
+  entry="{ ${parts[0]}${parts[1]:+, ${parts[1]}} }"
+fi
+
+# Find the repo and data file.
+if [[ -z ${DOTFILES_DIR:-} ]]; then
+  command -v chezmoi >/dev/null || die "set DOTFILES_DIR or install chezmoi"
+  DOTFILES_DIR="$(chezmoi source-path)"
+fi
+data="$DOTFILES_DIR/.chezmoidata/packages.yaml"
+[[ -f $data ]] || die "no package list at $data"
+
+# Already listed?  Match the name anywhere in an entry line.
+if grep -Eq "^ *- (.*[ {:])?${pkg//./\\.}( *[,}]| *$)" "$data"; then
+  die "'$pkg' is already in $data"
+fi
+
+# Install it here first, so a typo never lands in the list.
+here_name=$([[ $os == termux ]] && echo "$termux_name" || echo "$arch_name")
+if [[ -n $here_name ]]; then
+  if [[ $os == termux ]]; then
+    pkg install -y "$here_name"
+  else
+    paru -S --needed "$here_name"
+  fi
+else
+  echo "pkgadd: not installing on $os (listed for the other OS only)"
+fi
+
+git -C "$DOTFILES_DIR" pull --rebase --autostash --quiet \
+  || echo "pkgadd: git pull failed, continuing with the local copy" >&2
+
+# Insert the entry into its section, keeping the section alphabetical
+# (sorted by the first name in each entry).
+key() { sed -E 's/^ *- *//; s/^\{ *[a-z]+: *//; s/[ ,}].*$//' <<<"$1"; }
+new_key=$(key "- $entry")
+tmp=$(mktemp)
+awk -v section="  $section:" -v entry="    - $entry" -v newkey="$new_key" '
+  function key(s) { sub(/^ *- */, "", s); sub(/^\{ *[a-z]+: */, "", s); sub(/[ ,}].*$/, "", s); return s }
+  $0 == section { insec = 1; print; next }
+  insec && /^    - / && !done && key($0) > newkey { print entry; done = 1 }
+  insec && !/^    - / && !done { print entry; done = 1; insec = 0 }
+  insec && !/^    - / { insec = 0 }
+  { print }
+  END { if (insec && !done) print entry }
+' "$data" >"$tmp"
+grep -Fxq "    - $entry" "$tmp" || { rm -f "$tmp"; die "could not find '  $section:' in $data"; }
+cat "$tmp" >"$data"
+rm -f "$tmp"
+
+echo "pkgadd: added '$entry' to $section"
+git -C "$DOTFILES_DIR" add .chezmoidata/packages.yaml
+git -C "$DOTFILES_DIR" commit --quiet -m "packages: add $pkg ($section)"
+if ((push)); then
+  git -C "$DOTFILES_DIR" push --quiet
+  echo "pkgadd: committed and pushed"
+else
+  echo "pkgadd: committed (not pushed)"
+fi

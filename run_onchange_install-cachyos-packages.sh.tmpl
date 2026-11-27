@@ -3,22 +3,18 @@
 
 set -euo pipefail
 
+# Package list: .chezmoidata/packages.yaml (cli + desktop).
+
 {{ if and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") (eq .chezmoi.osRelease.id "cachyos") -}}
 
 packages=(
-  docker
-  docker-compose
-  git
-  kio-extras
-  lazygit
-  lutris
-  neovim
-  p7zip
-  ripgrep
-  sshfs
-  starship
-  visual-studio-code-bin
-  wl-clipboard
+{{- range (concat .packages.cli .packages.desktop) }}
+{{-   if kindIs "string" . }}
+  {{ . }}
+{{-   else if hasKey . "arch" }}
+  {{ .arch }}
+{{-   end }}
+{{- end }}
 )
 
 sudo -v

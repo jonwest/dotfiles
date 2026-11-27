@@ -5,6 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Personal scripts (pkgadd, ...)
+[[ ":$PATH:" != *":$HOME/.local/bin:"* ]] && PATH="$HOME/.local/bin:$PATH"
+
 alias ls="ls --color=auto"
 alias ll='ls -alh'
 alias grep="grep --color=auto"
