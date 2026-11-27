@@ -28,4 +28,6 @@ pkgadd --cli htop --arch-only         # CLI, but skip Termux
 pkgadd bat                            # asks whether it belongs on Termux
 ```
 
+Before installing, `pkgadd` looks the name up in the Arch/AUR and Termux repos. If one side doesn't have it, it lists similar names and lets you pick one, type another, or skip that OS. Pass `--no-check` to skip the lookup.
+
 Other machines pick it up on their next `chezmoi update`.
