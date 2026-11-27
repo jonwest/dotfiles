@@ -1,0 +1,34 @@
+# Packages installed by the run_onchange_install-*-packages.sh scripts.
+#
+#   cli:     terminal tools. Installed on CachyOS and on Termux.
+#   desktop: GUI apps and services. Installed on CachyOS only.
+#
+# An entry is either a plain name, used on every OS:
+#     - ripgrep
+# or a map of names per OS. Leave an OS out to skip the package there:
+#     - { arch: fd, termux: fd-find }   # different names
+#     - { termux: termux-api }          # Termux only
+#
+# `pkgadd` (in ~/.local/bin) installs a package and adds it here for you.
+
+packages:
+  cli:
+    - git
+    - inetutils
+    - jq
+    - lazygit
+    - neovim
+    - p7zip
+    - ripgrep
+    - rsync
+    - starship
+    - { termux: termux-api }
+
+  desktop:
+    - docker
+    - docker-compose
+    - kio-extras
+    - lutris
+    - sshfs
+    - visual-studio-code-bin
+    - wl-clipboard

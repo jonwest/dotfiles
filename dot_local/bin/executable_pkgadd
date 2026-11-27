@@ -1,0 +1,232 @@
+#!/usr/bin/env bash
+# pkgadd: install a package on this machine and record it in the dotfiles.
+#
+#   pkgadd [--cli | --desktop] [--arch NAME] [--termux NAME] [--no-push] PACKAGE
+#
+#   --cli          terminal tool: installed on CachyOS and Termux
+#   --desktop      GUI app or service: installed on CachyOS only
+#   --arch NAME    name on Arch/CachyOS, if it differs from PACKAGE
+#   --termux NAME  name on Termux, if it differs from PACKAGE
+#   --arch-only    (cli) skip it on Termux
+#   --termux-only  (cli) skip it on Arch/CachyOS
+#   --no-push      commit, but don't push
+#   --no-check     don't look the names up in the Arch/AUR and Termux repos
+#
+# Before installing, pkgadd checks each name in the repos of every OS it's
+# going to (Arch + AUR, and Termux).  If a name is missing it lists similar
+# ones and lets you pick, type another name, or skip that OS.
+#
+# With no --cli or --desktop it asks.  The list lives in
+# .chezmoidata/packages.yaml in the dotfiles repo; set DOTFILES_DIR to point
+# somewhere else if the repo is not managed by chezmoi.
+
+set -euo pipefail
+
+usage() { sed -n '2,22s/^# \{0,1\}//p' "$0"; exit "${1:-0}"; }
+die() { echo "pkgadd: $*" >&2; exit 1; }
+
+section="" arch_name="" termux_name="" arch_only=0 termux_only=0 push=1 check=1 pkg=""
+while (($#)); do
+  case "$1" in
+    --cli) section=cli ;;
+    --desktop) section=desktop ;;
+    --arch) arch_name="${2:?--arch needs a name}"; shift ;;
+    --termux) termux_name="${2:?--termux needs a name}"; shift ;;
+    --arch-only) arch_only=1 ;;
+    --termux-only) termux_only=1 ;;
+    --no-push) push=0 ;;
+    --no-check) check=0 ;;
+    -h|--help) usage ;;
+    -*) echo "pkgadd: unknown option $1" >&2; usage 1 ;;
+    *) [[ -z $pkg ]] || die "one package at a time"; pkg="$1" ;;
+  esac
+  shift
+done
+[[ -n $pkg ]] || usage 1
+
+if [[ -n ${TERMUX_VERSION:-} || ${PREFIX:-} == *com.termux* ]]; then
+  os=termux
+else
+  os=arch
+fi
+
+if [[ -z $section ]]; then
+  if [[ $os == termux ]]; then
+    section=cli
+  else
+    read -rp "Also install '$pkg' on Termux? (y = cli, n = desktop only) [y/N] " ans
+    [[ $ans == [yY]* ]] && section=cli || section=desktop
+  fi
+fi
+[[ $section == desktop && $os == termux ]] && die "desktop packages are not installed on Termux"
+[[ $section == desktop && ( -n $termux_name || $termux_only == 1 ) ]] && die "desktop packages have no Termux name"
+((arch_only && termux_only)) && die "--arch-only and --termux-only together means nowhere"
+
+: "${arch_name:=$pkg}" "${termux_name:=$pkg}"
+((arch_only)) && termux_name=""
+((termux_only)) && arch_name=""
+[[ $section == desktop ]] && termux_name=""
+
+# Find the repo and data file.
+if [[ -z ${DOTFILES_DIR:-} ]]; then
+  command -v chezmoi >/dev/null || die "set DOTFILES_DIR or install chezmoi"
+  DOTFILES_DIR="$(chezmoi source-path)"
+fi
+data="$DOTFILES_DIR/.chezmoidata/packages.yaml"
+[[ -f $data ]] || die "no package list at $data"
+
+# Already listed?  Match the name anywhere in an entry line.
+listed() { grep -Eq "^ *- (.*[ {:])?${1//./\\.}( *[,}]| *$)" "$data"; }
+listed "$pkg" && die "'$pkg' is already in $data"
+
+# Look the names up in each OS's repos. -------------------------------------
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/pkgadd"
+termux_index="${PKGADD_TERMUX_INDEX:-https://packages.termux.dev/apt/termux-main/dists/stable/main/binary-aarch64/Packages.gz}"
+arch_api="https://archlinux.org/packages/search/json/"
+aur_api="https://aur.archlinux.org/rpc/v5"
+
+fetch() { command -v curl >/dev/null && curl -fsSL --max-time 10 "$1"; }
+urlenc() { sed 's/+/%2B/g' <<<"$1"; }
+
+# All Termux package names, one per line.  Off Termux, the index is
+# downloaded once a day into ~/.cache/pkgadd.
+termux_names() {
+  if [[ $os == termux ]]; then
+    apt-cache pkgnames 2>/dev/null
+    return 0
+  fi
+  local f="$cache/termux-packages.txt"
+  if [[ ! -s $f || -n $(find "$f" -mmin +1440 2>/dev/null) ]]; then
+    mkdir -p "$cache"
+    if fetch "$termux_index" | gzip -dc 2>/dev/null | sed -n 's/^Package: //p' >"$f.tmp" && [[ -s $f.tmp ]]; then
+      mv "$f.tmp" "$f"
+    else
+      rm -f "$f.tmp"
+    fi
+  fi
+  [[ -s $f ]] && cat "$f"
+  return 0
+}
+
+# *_has NAME: 0 = found, 1 = not found, 2 = couldn't check.
+termux_has() {
+  local names
+  names=$(termux_names)
+  [[ -n $names ]] || return 2
+  grep -Fxq -- "$1" <<<"$names"
+}
+termux_suggest() { termux_names | grep -F -- "$1" | sort | head -n 10; }
+
+arch_has() {
+  if [[ $os == arch ]]; then
+    command -v paru >/dev/null || return 2
+    paru -Si -- "$1" >/dev/null 2>&1   # repos and AUR
+    return
+  fi
+  local r
+  r=$(fetch "${arch_api}?name=$(urlenc "$1")") || return 2
+  grep -q "\"pkgname\": *\"$1\"" <<<"$r" && return 0
+  r=$(fetch "$aur_api/info?arg[]=$(urlenc "$1")") || return 2
+  grep -q '"resultcount": *[1-9]' <<<"$r"
+}
+arch_suggest() {
+  if [[ $os == arch ]]; then
+    paru -Ssq -- "$1" 2>/dev/null | head -n 10
+    return 0
+  fi
+  { fetch "${arch_api}?q=$(urlenc "$1")"; fetch "$aur_api/search/$(urlenc "$1")?by=name"; } 2>/dev/null \
+    | grep -o '"\(pkgname\|Name\)": *"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/' | awk '!seen[$0]++' | head -n 10
+}
+
+# resolve SIDE NAME: sets $resolved to a name that exists on SIDE, or to ''
+# if you choose to skip that OS.
+resolve() {
+  local side=$1 name=$2 rc ans s=()
+  while :; do
+    rc=0; "${side}_has" "$name" || rc=$?
+    if ((rc == 0)); then resolved=$name; return; fi
+    if ((rc == 2)); then
+      echo "pkgadd: couldn't reach the $side repos; using '$name' unchecked" >&2
+      resolved=$name; return
+    fi
+    echo "pkgadd: '$name' isn't in the $side repos." >&2
+    mapfile -t s < <("${side}_suggest" "$name")
+    if ((${#s[@]})); then
+      echo "Similar names on $side:" >&2
+      for i in "${!s[@]}"; do printf '  %d) %s\n' $((i + 1)) "${s[i]}" >&2; done
+    fi
+    [[ -t 0 ]] || die "pass --$side NAME, or skip $side, to run without a terminal"
+    read -rp "Pick a number, type a name, s to skip $side, or q to quit: " ans
+    case $ans in
+      q|Q|"") die "nothing added" ;;
+      s|S) resolved=""; return ;;
+      *[!0-9]*) name=$ans ;;
+      *) ((ans >= 1 && ans <= ${#s[@]})) || { echo "pkgadd: no option $ans" >&2; continue; }
+         resolved=${s[ans - 1]}; return ;;
+    esac
+  done
+}
+
+if ((check)); then
+  if [[ -n $arch_name ]]; then resolve arch "$arch_name"; arch_name=$resolved; fi
+  if [[ -n $termux_name ]]; then resolve termux "$termux_name"; termux_name=$resolved; fi
+  [[ -n $arch_name || -n $termux_name ]] || die "skipped everywhere, nothing added"
+  for n in "$arch_name" "$termux_name"; do
+    [[ -n $n ]] && listed "$n" && die "'$n' is already in $data"
+  done
+fi
+
+# The YAML entry: a plain name when it's the same everywhere it's installed.
+if [[ $section == desktop ]]; then
+  entry="$arch_name"
+elif [[ -n $arch_name && $arch_name == "$termux_name" ]]; then
+  entry="$arch_name"
+else
+  parts=()
+  [[ -n $arch_name ]] && parts+=("arch: $arch_name")
+  [[ -n $termux_name ]] && parts+=("termux: $termux_name")
+  entry="{ ${parts[0]}${parts[1]:+, ${parts[1]}} }"
+fi
+
+# Install it here first, so a typo never lands in the list.
+here_name=$([[ $os == termux ]] && echo "$termux_name" || echo "$arch_name")
+if [[ -n $here_name ]]; then
+  if [[ $os == termux ]]; then
+    pkg install -y "$here_name"
+  else
+    paru -S --needed "$here_name"
+  fi
+else
+  echo "pkgadd: not installing on $os (listed for the other OS only)"
+fi
+
+git -C "$DOTFILES_DIR" pull --rebase --autostash --quiet \
+  || echo "pkgadd: git pull failed, continuing with the local copy" >&2
+
+# Insert the entry into its section, keeping the section alphabetical
+# (sorted by the first name in each entry).
+key() { sed -E 's/^ *- *//; s/^\{ *[a-z]+: *//; s/[ ,}].*$//' <<<"$1"; }
+new_key=$(key "- $entry")
+tmp=$(mktemp)
+awk -v section="  $section:" -v entry="    - $entry" -v newkey="$new_key" '
+  function key(s) { sub(/^ *- */, "", s); sub(/^\{ *[a-z]+: */, "", s); sub(/[ ,}].*$/, "", s); return s }
+  $0 == section { insec = 1; print; next }
+  insec && /^    - / && !done && key($0) > newkey { print entry; done = 1 }
+  insec && !/^    - / && !done { print entry; done = 1; insec = 0 }
+  insec && !/^    - / { insec = 0 }
+  { print }
+  END { if (insec && !done) print entry }
+' "$data" >"$tmp"
+grep -Fxq "    - $entry" "$tmp" || { rm -f "$tmp"; die "could not find '  $section:' in $data"; }
+cat "$tmp" >"$data"
+rm -f "$tmp"
+
+echo "pkgadd: added '$entry' to $section"
+git -C "$DOTFILES_DIR" add .chezmoidata/packages.yaml
+git -C "$DOTFILES_DIR" commit --quiet -m "packages: add ${arch_name:-$termux_name} ($section)"
+if ((push)); then
+  git -C "$DOTFILES_DIR" push --quiet
+  echo "pkgadd: committed and pushed"
+else
+  echo "pkgadd: committed (not pushed)"
+fi
