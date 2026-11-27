@@ -27,6 +27,7 @@ packages:
   desktop:
     - docker
     - docker-compose
+    - easyeffects
     - kio-extras
     - lutris
     - sshfs
