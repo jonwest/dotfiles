@@ -30,6 +30,7 @@ packages:
     - docker-compose
     - easyeffects
     - kio-extras
+    - lsp-plugins
     - lutris
     - signal-desktop
     - sshfs
