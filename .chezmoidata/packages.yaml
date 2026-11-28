@@ -35,4 +35,5 @@ packages:
     - signal-desktop
     - sshfs
     - visual-studio-code-bin
+    - wireguard-tools
     - wl-clipboard
