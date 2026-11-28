@@ -33,6 +33,7 @@ packages:
     - lsp-plugins
     - lutris
     - python-pip
+    - python-pipx
     - signal-desktop
     - sshfs
     - visual-studio-code-bin
